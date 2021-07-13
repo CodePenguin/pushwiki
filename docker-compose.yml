@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  pushwiki:
+    build: .
+    command: sh -c "yarn install && yarn serve"
+    working_dir: /app
+    volumes:
+        - ./:/app
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
