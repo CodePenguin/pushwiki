@@ -9,9 +9,11 @@
       {
         "title": "Examples",
         "path": "/examples"
+      },
+      {
+        "title": "Settings",
+        "path": "/docs/settings"
       }
-    ],
-    "background": "primary",
-    "style": "dark"
+    ]
   }
 }
