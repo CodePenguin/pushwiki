@@ -8,7 +8,7 @@
   <div v-else>
     <h1>Page Not Found</h1>
     <p class="alert alert-secondary">
-      This page does not exist yet!  Create a new file called "{{path}}" and refresh this page.
+      This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
     </p>
   </div>
 </template>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       loading: true,
+      localPath: "",
       path: "",
       content: ""
     }
@@ -37,8 +38,9 @@ export default {
   },
   methods: {
     retrieveContent(path, callback) {
-      this.path = path ?? "index.md"
-      axios.get(this.path)
+      this.path = path ?? "index"
+      this.localPath = this.path + ".md"
+      axios.get(this.localPath)
         .then(response => {
           callback(undefined, response)
         })

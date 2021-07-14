@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-report": "vue-cli-service build --report",
@@ -10,6 +11,9 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "@types/dompurify": "^2.2.3",
+    "@types/highlightjs": "^9.12.2",
+    "@types/marked": "^2.0.4",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "bootswatch": "^5.0.2",

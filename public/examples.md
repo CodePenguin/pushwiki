@@ -4,9 +4,9 @@ It's very easy to make some words **bold** and other words *italic* with Markdow
 
 ## Wiki Links
 
-[Home](index.md)
+[Home](index)
 
-[Link to a file that does not exist yet](notfound.md)
+[Link to a file that does not exist yet](notfound)
 
 ## Lists
 
