@@ -27,7 +27,7 @@ export default {
     }
   },
   components: {
-      Markdown
+    Markdown
   },
   created() {
     var path = this.$route.params.path
@@ -39,12 +39,12 @@ export default {
     retrieveContent(path, callback) {
       this.path = path ?? "index.md"
       axios.get(this.path)
-      .then(response => {
-        callback(undefined, response)
-      })
-      .catch(error => {
-        callback(error, undefined)
-      })
+        .then(response => {
+          callback(undefined, response)
+        })
+        .catch(error => {
+          callback(error, undefined)
+        })
     },
     handleResponse(error, response) {
       if (error) {

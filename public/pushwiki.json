@@ -1,0 +1,15 @@
+{
+  "title": "PushWiki",
+  "navigation": {
+    "links": [
+      {
+        "title": "Home",
+        "path": "/"
+      },
+      {
+        "title": "Examples",
+        "path": "/examples.md"
+      }
+    ]
+  }
+}
