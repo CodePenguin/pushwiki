@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar navbar-expand-lg navbar-dark" v-bind:class="navbarClasses">
+  <header class="navbar navbar-expand-lg" v-bind:class="navbarClasses">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">{{title}}</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,10 @@ export default {
   },
   computed: {
     navbarClasses() {
-      return ['bg-' + (this.settings.navigation?.style ?? "primary")]
+      return [
+        'navbar-' + (this.settings.navigation?.style ?? "dark"),
+        'bg-' + (this.settings.navigation?.background ?? "primary")
+      ]
     },
     title() {
       return this.settings.title ?? "PushWiki"

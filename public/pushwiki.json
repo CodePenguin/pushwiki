@@ -11,6 +11,7 @@
         "path": "/examples.md"
       }
     ],
-    "style": "primary"
+    "background": "primary",
+    "style": "dark"
   }
 }
