@@ -4,7 +4,7 @@
   </div>
   <div v-else>
     <Navigation :settings="settings" />
-    <main class="container">
+    <main class="container mt-3">
       <router-view/>
     </main>
   </div>

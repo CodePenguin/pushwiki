@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
+    "bootswatch": "^5.0.2",
     "core-js": "^3.6.5",
     "dompurify": "^2.3.0",
     "highlight.js": "^11.1.0",
