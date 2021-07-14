@@ -33,5 +33,5 @@ export default {
 </script>
 
 <style scoped>
-@import "~highlight.js/styles/monokai-sublime.css";
+@import '~highlightCSS'
 </style>

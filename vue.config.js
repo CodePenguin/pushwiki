@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   css: {
     extract: false
@@ -9,6 +11,11 @@ module.exports = {
     output: {
       filename: 'pushwiki.js',
       chunkFilename: 'pushwiki.js'
+    },
+    resolve: {
+      alias: {
+        highlightCSS: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.HIGHLIGHTJS_STYLE + '.css'),
+      }
     }
   }
 }
