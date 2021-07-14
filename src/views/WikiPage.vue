@@ -39,6 +39,9 @@ export default {
   methods: {
     retrieveContent(path, callback) {
       this.path = path ?? "index"
+      if (this.path.endsWith(".md")) {
+        this.path = this.path.substring(0, this.path.length - 3)
+      }
       this.localPath = this.path + ".md"
       axios.get(this.localPath)
         .then(response => {

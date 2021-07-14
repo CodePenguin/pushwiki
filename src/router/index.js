@@ -9,6 +9,11 @@ const routes = [
     component: WikiPage
   },
   {
+    path: '/:path([\\w-/]+\\.md)',
+    name: 'wiki-page-md',
+    component: WikiPage,
+  },
+  {
     path: '/:path([\\w-/]+)',
     name: 'wiki-page',
     component: WikiPage,

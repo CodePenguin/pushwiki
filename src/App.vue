@@ -31,7 +31,6 @@ export default {
       .then(response => {
         this.settings = response.data
         this.loaded = true
-        console.log("settings", this.settings)
       })
       .catch(error => {
         if (error.response.status != 404) {
