@@ -8,7 +8,13 @@ The "pushwiki.json" file allows you to change various aspects of PushWiki.
 | ------------- | ----------- |
 | title | The name used in the branding of the PushWiki instance. |
 | navigation | An object to configure navigation settings.  See the Navigation section below. |
+
+## Markdown
+
+| Property name | Description |
+| ------------- | ----------- |
 | tableClasses | A list of [Bootstrap Classes](https://getbootstrap.com/docs/5.0/content/tables/) that will be applied to tables.  (Default: table) |
+
 
 ## Navigation
 

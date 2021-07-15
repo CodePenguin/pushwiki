@@ -31,7 +31,7 @@ export default {
     }
   },
   created() {
-    tableClasses = this.$root.settings.tableClasses ?? tableClasses
+    tableClasses = this.$root.settings?.markdown?.tableClasses ?? tableClasses
     marked.use({ renderer })
     marked.setOptions({
       baseUrl: "#/",

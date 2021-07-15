@@ -17,5 +17,7 @@
     ],
     "navbarClasses": "navbar-dark bg-primary"
   },
-  "tableClasses": "table"
+  "markdown": {
+    "tableClasses": "table"
+  }
 }
