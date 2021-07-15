@@ -5,6 +5,17 @@ module.exports = {
     extract: false
   },
   configureWebpack: {
+    externals: process.env.VUE_APP_BUNDLE_TYPE === 'slim' ? {
+      axios: 'axios',
+      bootstrap: 'bootstrap',
+      bootswatch: 'bootswatch',
+      'core-js': 'core-js',
+      dompurify: 'DOMPurify',
+      'highlight.js': 'hljs',
+      marked: 'marked',
+      vue: 'Vue',
+      'vue-router': 'VueRouter'
+    } : {},
     optimization: {
       splitChunks: false
     },
@@ -14,9 +25,27 @@ module.exports = {
     },
     resolve: {
       alias: {
-        bootstrapCSS: path.resolve(__dirname, './node_modules/bootswatch/dist/' + process.env.BOOTSWATCH_THEME + '/bootstrap.min.css'),
-        highlightCSS: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.HIGHLIGHTJS_STYLE + '.css'),
+        bootstrapCSS: path.resolve(__dirname, './node_modules/bootswatch/dist/' + process.env.VUE_APP_BOOTSWATCH_THEME + '/bootstrap.min.css'),
+        highlightCSS: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css'),
       }
     }
+  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = 'PushWiki'
+        if (process.env.VUE_APP_BUNDLE_TYPE === 'slim') {
+          args[0].template = args[0].template.replace('.html', '.slim.html')
+        }
+        return args
+      })
+
+    config
+      .plugin('copy')
+      .tap(([options])=> {
+        options[0].ignore.push('index.slim.html')
+        return [options]
+      })
   }
 }
