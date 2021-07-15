@@ -31,6 +31,7 @@ export default {
       .then(response => {
         this.settings = response.data
         this.loaded = true
+        this.setSubTitle()
       })
       .catch(error => {
         if (error.response.status != 404) {
@@ -39,5 +40,10 @@ export default {
         this.loaded = true
       })
   },
+  methods: {
+    setSubTitle(subtitle) {
+      document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
+    }
+  }
 }
 </script>

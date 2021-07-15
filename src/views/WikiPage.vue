@@ -1,9 +1,9 @@
 <template>
   <div v-if="loading">
-    <h1>Loading...</h1>
+    <Loading/>
   </div>
   <div v-else-if="content != null">
-    <Markdown :content="content" />
+    <Markdown :content="content" v-on:content-title="setSubTitle" />
   </div>
   <div v-else>
     <h1>Page Not Found</h1>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue'
 import Markdown from '@/components/Markdown.vue'
 const axios = require('axios').default
 
@@ -28,6 +29,7 @@ export default {
     }
   },
   components: {
+    Loading,
     Markdown
   },
   created() {
@@ -62,6 +64,9 @@ export default {
         this.content = response.data
         this.loading = false
       }
+    },
+    setSubTitle(subtitle) {
+      this.$root.setSubTitle(subtitle)
     }
   },
   watch: {

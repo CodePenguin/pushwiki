@@ -7,7 +7,15 @@ import DOMPurify from 'dompurify';
 import hljs from "highlight.js";
 import marked from "marked";
 
+let mainHeading = null
+
 const renderer = {
+  heading(text, level) {
+    if (level === 1 && !this.mainHeading) {
+      mainHeading = text
+    }
+    return false;
+  },
   table(header, body) {
     return `<table class="table"><thead>${header}</thead><tbody>${body}</tbody></table>`
   }
@@ -33,7 +41,10 @@ export default {
   },
   computed: {
     compiledContent() {
-      return DOMPurify.sanitize(marked(this.content))
+      mainHeading = null
+      var content = DOMPurify.sanitize(marked(this.content));
+      this.$emit('contentTitle', mainHeading)
+      return content
     }
   }
 }
