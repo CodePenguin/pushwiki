@@ -15,7 +15,7 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 
 | Property name | Description |
 | ------------- | ----------- |
-| preClasses | A list of CSS classes that will be applied to tables.  (Default: border p-1) |
+| preClasses | A list of CSS classes that will be applied to pre elements.  (Default: border p-1) |
 | tableClasses | A list of CSS classes that will be applied to tables. See [Bootstrap Tables](https://getbootstrap.com/docs/5.0/content/tables/). |
 
 
