@@ -8,6 +8,7 @@ import hljs from "highlight.js";
 import marked from "marked";
 
 let mainHeading = null
+let tableClasses = "table"
 
 const renderer = {
   heading(text, level) {
@@ -17,7 +18,7 @@ const renderer = {
     return false;
   },
   table(header, body) {
-    return `<table class="table"><thead>${header}</thead><tbody>${body}</tbody></table>`
+    return `<table class="${tableClasses}"><thead>${header}</thead><tbody>${body}</tbody></table>`
   }
 }
 
@@ -30,6 +31,7 @@ export default {
     }
   },
   created() {
+    tableClasses = this.$root.settings.tableClasses ?? tableClasses
     marked.use({ renderer })
     marked.setOptions({
       baseUrl: "#/",
