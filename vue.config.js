@@ -11,7 +11,7 @@ module.exports = {
       bootswatch: 'bootswatch',
       'core-js': 'core-js',
       dompurify: 'DOMPurify',
-      'highlight.js': 'hljs',
+      'highlightJS': 'hljs',
       marked: 'marked',
       vue: 'Vue',
       'vue-router': 'VueRouter'
