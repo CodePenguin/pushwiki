@@ -24,7 +24,7 @@ It's very easy to make some words **bold** and other words *italic* with Markdow
 ## Syntax Highlighting
 
 ```javascript
-if (isAwesome){
+if (isAwesome) {
   return true
 }
 ```

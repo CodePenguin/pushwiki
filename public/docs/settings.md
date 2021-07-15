@@ -2,6 +2,8 @@
 
 The "pushwiki.json" file allows you to change various aspects of PushWiki.
 
+For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com/docs/5.0/content/tables/).
+
 ## Base Settings
 
 | Property name | Description |
@@ -13,7 +15,8 @@ The "pushwiki.json" file allows you to change various aspects of PushWiki.
 
 | Property name | Description |
 | ------------- | ----------- |
-| tableClasses | A list of [Bootstrap Classes](https://getbootstrap.com/docs/5.0/content/tables/) that will be applied to tables.  (Default: table) |
+| preClasses | A list of CSS classes that will be applied to tables.  (Default: border p-1) |
+| tableClasses | A list of CSS classes that will be applied to tables. See [Bootstrap Tables](https://getbootstrap.com/docs/5.0/content/tables/). |
 
 
 ## Navigation
@@ -21,7 +24,7 @@ The "pushwiki.json" file allows you to change various aspects of PushWiki.
 | Property name | Description |
 | ------------- | ----------- |
 | links | An array of link objects that define the navigation links. |
-| navbarClasses | A list of [Bootstrap Classes](https://getbootstrap.com/docs/5.0/components/navbar/#color-schemes) that will be applied to the Navbar for extra styling.  (Default: navbar-dark bg-primary) |
+| navbarClasses | A list of CSS classes that will be applied to the Navbar for extra styling.  (Default: navbar-dark bg-primary) See [Bootstrap Navbar Color Schemes](https://getbootstrap.com/docs/5.0/components/navbar/#color-schemes). |
 
 ### Navigation Links
 
