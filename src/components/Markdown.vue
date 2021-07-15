@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import DOMPurify from 'dompurify';
-import hljs from "highlight.js";
-import marked from "marked";
+import DOMPurify from 'dompurify'
+import hljs from 'highlightJS'
+import marked from "marked"
 
 let mainHeading = null
 let tableClasses = "table"
