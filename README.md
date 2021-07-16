@@ -14,13 +14,20 @@ yarn serve
 ```
 
 ### Compiles and minifies for production
+
+#### Full version with all dependencies included
 ```
 yarn build
 ```
 
+#### Slim version with all dependencies loaded from external CDN
+```
+yarn build-slim
+```
+
 ### Docker for development
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 To get setup with a development environment quickly do the following:
