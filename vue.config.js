@@ -37,7 +37,7 @@ module.exports = {
             const contents = htmlContents
               .replace('<link href="/pushwiki.js" rel="preload" as="script">', '')
               .replace('<script type="text/javascript" src="/pushwiki.js"></script>', '')
-              .replace('<!-- built files will be auto injected -->', '<script type="text/javascript">\n' + outputScriptContents + '\n  </script>')
+              .replace('<!-- built files will be auto injected -->', '<script type="text/javascript">\n      ' + outputScriptContents + '\n    </script>')
             fs.writeFileSync(path.resolve(__dirname, './dist/index.html'), contents)
           })
         }
