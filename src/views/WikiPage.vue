@@ -3,7 +3,7 @@
     <Loading/>
   </div>
   <div v-else-if="content != null" class="row">
-    <Sidebar sidebarType="left" :tableOfContents="tableOfContents" />
+    <Sidebar sidebarType="left" :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
     <article class="page" :class="pageClasses">
       <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
     </article>
@@ -47,6 +47,9 @@ export default {
   computed: {
     pageClasses () {
       return this.$root.settings.styles?.page
+    },
+    sidebarIsVisible() {
+      return this.tableOfContents.length > 1 || (this.tableOfContents.length === 1 && this.tableOfContents[0].level > 1)
     }
   },
   methods: {
