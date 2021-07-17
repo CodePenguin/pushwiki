@@ -8,9 +8,9 @@ import hljs from 'highlightJS'
 import marked from "marked"
 
 let mainHeading = null
-let preClasses = "border p-1"
-let tableClasses = ""
 let contentUpdated = false
+let preClasses = ""
+let tableClasses = ""
 
 const renderer = {
   code(code, infostring) {
@@ -39,8 +39,8 @@ export default {
     }
   },
   created() {
-    preClasses = this.$root.settings?.markdown?.preClasses ?? preClasses
-    tableClasses = this.$root.settings?.markdown?.tableClasses ?? tableClasses
+    preClasses = this.$root.settings.styles?.markdown?.pre
+    tableClasses = this.$root.settings.styles?.markdown?.table
     marked.use({ renderer })
     marked.setOptions({
       baseUrl: "#/"

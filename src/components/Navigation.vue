@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     navbarClasses() {
-      return this.settings.navigation?.navbarClasses ?? "navbar-dark bg-primary"
+      return this.settings.styles?.navigation?.navbar ?? "navbar-dark bg-primary"
     },
     title() {
       return this.settings.title ?? "PushWiki"

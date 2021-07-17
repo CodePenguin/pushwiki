@@ -17,13 +17,14 @@
 <script>
 import Loading from '@/components/Loading.vue'
 import Navigation from '@/components/Navigation.vue'
+import defaultSettings from '@/defaultSettings.js'
 const axios = require('axios').default
 
 export default {
   data() {
     return {
       loaded: false,
-      settings: {}
+      settings: defaultSettings
     }
   },
   components: {
@@ -33,13 +34,13 @@ export default {
   created() {
     axios.get("pushwiki.json")
       .then(response => {
-        this.settings = response.data
+        this.settings = Object.assign({}, defaultSettings, response.data)
         this.loaded = true
         this.setDocumentClasses()
         this.setSubTitle()
       })
       .catch(error => {
-        if (error.response.status != 404) {
+        if (error.response?.status != 404) {
           console.log("Error retrieving settings", error)
         }
         this.loaded = true
@@ -48,7 +49,7 @@ export default {
   methods: {
     setDocumentClasses() {
       // Body Classes
-      let classes = (this.settings.bodyClasses ?? '').split(' ')
+      let classes = (this.settings.styles?.body ?? '').split(' ')
       classes.forEach(c => document.body.classList.add(c))
     },
     setSubTitle(subtitle) {
