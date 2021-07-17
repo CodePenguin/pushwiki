@@ -4,7 +4,7 @@
   </div>
   <div v-else>
     <Navigation :settings="settings" />
-    <main class="container mt-3">
+    <main :class="mainClasses">
       <router-view v-slot="{ Component }">
         <transition @after-leave="transitionDone">
           <component :is="Component" />
@@ -46,11 +46,18 @@ export default {
         this.loaded = true
       })
   },
+  computed: {
+    mainClasses() {
+      return this.settings.styles?.main
+    }
+  },
   methods: {
     setDocumentClasses() {
       // Body Classes
       let classes = (this.settings.styles?.body ?? '').split(' ')
-      classes.forEach(c => document.body.classList.add(c))
+      classes.forEach(c => { 
+        if (c !== '') document.body.classList.add(c) 
+      })
     },
     setSubTitle(subtitle) {
       document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
@@ -62,6 +69,29 @@ export default {
           element?.scrollIntoView()
         })
       }
+    },
+    updateRouterAnchors(baseSelector) {
+      let pageHash = window.location.hash ?? '#/'
+      let internalHashIndex = pageHash.indexOf('#', 1)
+      if (internalHashIndex > -1) {
+        pageHash = pageHash.substring(0, internalHashIndex)
+      }
+      var links = document.querySelectorAll(baseSelector + ' a')
+      links.forEach(link => {
+        if (!link.href) return
+        let href = link.getAttribute('href')
+        if (!href.startsWith('#')) return
+        if (href.match(/^#[\w-]+$/)) {
+          href = pageHash + href
+          link.href = href
+        }
+        if (href.startsWith(pageHash)) {
+          link.onclick = event => {
+            event.preventDefault()
+            this.$router.push(href.substring(1))
+          }
+        }
+      })
     }
   }
 }

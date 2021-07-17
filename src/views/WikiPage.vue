@@ -2,8 +2,11 @@
   <div v-if="loading">
     <Loading/>
   </div>
-  <div v-else-if="content != null">
-    <Markdown :content="content" v-on:content-title="setSubTitle" />
+  <div v-else-if="content != null" class="row">
+    <Sidebar sidebarType="left" :tableOfContents="tableOfContents" />
+    <article class="page" :class="pageClasses">
+      <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
+    </article>
   </div>
   <div v-else>
     <h1>Page Not Found</h1>
@@ -16,6 +19,7 @@
 <script>
 import Loading from '@/components/Loading.vue'
 import Markdown from '@/components/Markdown.vue'
+import Sidebar from '@/components/Sidebar.vue'
 const axios = require('axios').default
 
 export default {
@@ -25,18 +29,25 @@ export default {
       loading: true,
       localPath: "",
       path: "",
-      content: ""
+      content: "",
+      tableOfContents: []
     }
   },
   components: {
     Loading,
-    Markdown
+    Markdown,
+    Sidebar
   },
   created() {
     var path = this.$route.params.path
     this.retrieveContent(path, (error, response) => {
       this.handleResponse(error, response)
     })
+  },
+  computed: {
+    pageClasses () {
+      return this.$root.settings.styles?.page
+    }
   },
   methods: {
     retrieveContent(path, callback) {
@@ -67,6 +78,9 @@ export default {
     },
     setSubTitle(subtitle) {
       this.$root.setSubTitle(subtitle)
+    },
+    setTableOfContents(tableOfContents) {
+      this.tableOfContents = tableOfContents
     }
   },
   watch: {

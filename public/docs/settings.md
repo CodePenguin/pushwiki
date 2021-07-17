@@ -8,24 +8,16 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 
 | Property name | Description |
 | ------------- | ----------- |
-| bodyClasses | A list of CSS classes that will be applied to the document body. |
 | title | The name used in the branding of the PushWiki instance. |
 | navigation | An object to configure navigation settings.  See the Navigation section below. |
-
-## Markdown
-
-| Property name | Description |
-| ------------- | ----------- |
-| preClasses | A list of CSS classes that will be applied to pre elements.  (Default: border p-1) |
-| tableClasses | A list of CSS classes that will be applied to tables. See [Bootstrap Tables](https://getbootstrap.com/docs/5.0/content/tables/). |
-
+| styles | Provides properties to change the CSS classes that will be applied to various elements. |
 
 ## Navigation
 
 | Property name | Description |
 | ------------- | ----------- |
 | links | An array of link objects that define the navigation links. |
-| navbarClasses | A list of CSS classes that will be applied to the Navbar for extra styling.  (Default: navbar-dark bg-primary) See [Bootstrap Navbar Color Schemes](https://getbootstrap.com/docs/5.0/components/navbar/#color-schemes). |
+| navbarClasses | A list of CSS classes that will be applied to the Navbar for extra styling.  See [Bootstrap Navbar Color Schemes](https://getbootstrap.com/docs/5.0/components/navbar/#color-schemes). |
 
 ### Navigation Links
 
@@ -33,3 +25,34 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 | ------------- | ----------- |
 | title | The title of the link that will be displayed. |
 | path | The path to the desired wiki page excluding the ".md" extension.  If the page is "docs/settings.md", the path would be just "docs/settings". |
+
+## Styles
+
+| Property name | Description |
+| ------------- | ----------- |
+| body | A list of CSS classes that will be applied to the document body. |
+| main | A list of CSS classes that will be applied to the main content. This is the parent of the sidebar and page content. |
+| markdown | An object representing styles related to the markdown content. |
+| navigtion | An object representing styles related to the navigation content. |
+| page | A list of CSS classes that will be applied to the page content. |
+
+### Markdown Styles
+
+| Property name | Description |
+| ------------- | ----------- |
+| pre | A list of CSS classes that will be applied to pre elements. |
+| table | A list of CSS classes that will be applied to tables. See [Bootstrap Tables](https://getbootstrap.com/docs/5.0/content/tables/). |
+
+### Navigation Styles
+
+| Property name | Description |
+| ------------- | ----------- |
+| navbar | A list of CSS classes that will be applied to navbar. |
+| leftSidebar | An object representing styles related to the left side bar.  See the Sidebar Styles section. |
+
+#### Sidebar Styles
+
+| Property name | Description |
+| ------------- | ----------- |
+| nav | A list of CSS classes that will be applied to the nav elements of a sidebar. |
+| childNav | A list of CSS classes that will be applied to any nested nav elements of a sidebar.  |
