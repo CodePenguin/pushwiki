@@ -1,4 +1,5 @@
 {
+  "bodyClasses": "mt-3 pt-5",
   "title": "PushWiki",
   "navigation": {
     "links": [
@@ -15,7 +16,7 @@
         "path": "/docs/settings"
       }
     ],
-    "navbarClasses": "navbar-dark bg-primary"
+    "navbarClasses": "navbar-dark bg-primary fixed-top"
   },
   "markdown": {
     "preClasses": "border p-1",

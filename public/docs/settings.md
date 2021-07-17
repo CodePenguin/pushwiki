@@ -8,6 +8,7 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 
 | Property name | Description |
 | ------------- | ----------- |
+| bodyClasses | A list of CSS classes that will be applied to the document body. |
 | title | The name used in the branding of the PushWiki instance. |
 | navigation | An object to configure navigation settings.  See the Navigation section below. |
 

@@ -35,6 +35,7 @@ export default {
       .then(response => {
         this.settings = response.data
         this.loaded = true
+        this.setDocumentClasses()
         this.setSubTitle()
       })
       .catch(error => {
@@ -45,6 +46,14 @@ export default {
       })
   },
   methods: {
+    setDocumentClasses() {
+      // Body Classes
+      let classes = (this.settings.bodyClasses ?? '').split(' ')
+      classes.forEach(c => document.body.classList.add(c))
+    },
+    setSubTitle(subtitle) {
+      document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
+    },
     transitionDone () {
       if (this.$route.hash) {
         this.$nextTick(() => {
@@ -52,9 +61,6 @@ export default {
           element?.scrollIntoView()
         })
       }
-    },
-    setSubTitle(subtitle) {
-      document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
     }
   }
 }
