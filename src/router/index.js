@@ -26,7 +26,17 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      let element = document.querySelector(to.hash)
+      element?.scrollIntoView()
+    }
+    return false
+  }
 })
 
 export default router

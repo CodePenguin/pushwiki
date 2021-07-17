@@ -5,7 +5,11 @@
   <div v-else>
     <Navigation :settings="settings" />
     <main class="container mt-3">
-      <router-view/>
+      <router-view v-slot="{ Component }">
+        <transition @after-leave="transitionDone">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
   </div>
 </template>
@@ -41,6 +45,14 @@ export default {
       })
   },
   methods: {
+    transitionDone () {
+      if (this.$route.hash) {
+        this.$nextTick(() => {
+          let element = document.querySelector(this.$route.hash)
+          element?.scrollIntoView()
+        })
+      }
+    },
     setSubTitle(subtitle) {
       document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
     }
