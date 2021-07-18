@@ -65,8 +65,10 @@ export default {
     transitionDone () {
       if (this.$route.hash) {
         this.$nextTick(() => {
+          var header = document.querySelector('header')
+          var offset = header?.classList?.contains('fixed-top') ? header.clientHeight : 0
           let element = document.querySelector(this.$route.hash)
-          element?.scrollIntoView()
+          window.scroll({ top: (element.offsetTop - offset), left: 0, behavior: 'auto' })
         })
       }
     },

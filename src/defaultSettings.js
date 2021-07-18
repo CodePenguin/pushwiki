@@ -9,9 +9,9 @@ export default {
     }
   },
   styles: {
-    main: "container-fluid",
+    main: "container-fluid mt-5 pt-3",
     navigation: {
-      navbar: "navbar-dark bg-primary"
+      navbar: "navbar-dark bg-primary fixed-top"
     },
     page: {
       content: "col p-3",
