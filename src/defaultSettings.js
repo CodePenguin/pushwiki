@@ -20,7 +20,7 @@ export default {
         table: "table"
       },
       leftSidebar: {
-        nav: "nav-pills col-md-3 d-block bg-light nav nav-pills flex-column p-3 ps-0",
+        nav: "nav-pills col-md-4 col-lg-3 d-block bg-light nav nav-pills flex-column p-3 ps-0",
         childNav: "nav-pills flex-column ms-3",
       }
     }
