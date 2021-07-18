@@ -1,0 +1,44 @@
+name: Pushwiki-Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      VERSION: ${{ github.event.release.tag_name }}.${{ github.run_number }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.2.0
+      with:
+        cache: yarn
+    
+    - run: yarn install
+
+    - run: yarn build
+
+    - name: Zip Full
+      run: 7z a bin\PushWiki-${{ env.VERSION }}-full.zip -tzip dist/*
+
+    - run: yarn build-slim
+
+    - name: Zip Slim
+      run: 7z a bin\PushWiki-${{ env.VERSION }}-slim.zip -tzip dist/*
+
+    - name: Upload binaries
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          bin\PushWiki-${{ env.VERSION }}-full.zip
+          bin\PushWiki-${{ env.VERSION }}-slim.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
