@@ -10,6 +10,7 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 | ------------- | ----------- |
 | title | The name used in the branding of the PushWiki instance. |
 | navigation | An object to configure navigation settings.  See the Navigation section below. |
+| page | An object to configure page settings.  See the Page section below. |
 | styles | Provides properties to change the CSS classes that will be applied to various elements. |
 
 ## Navigation
@@ -26,6 +27,18 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 | title | The title of the link that will be displayed. |
 | path | The path to the desired wiki page excluding the ".md" extension.  If the page is "docs/settings.md", the path would be just "docs/settings". |
 
+## Page
+
+| Property name | Description |
+| ------------- | ----------- |
+| sidebar | An object to configure sidebar settings.  See the Sidebar Settings section below. |
+
+### Sidebar Settings
+
+| Property name | Description |
+| ------------- | ----------- |
+| headerLevels | A header level or range of header levels that will be included in the table of contents.  For a range, use a dash between the start and end header levels.  Valid header levesl are 1 - 6.  (Single Level: 2, Range: 2-4 ) |
+
 ## Styles
 
 | Property name | Description |
@@ -33,7 +46,7 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 | body | A list of CSS classes that will be applied to the document body. |
 | main | A list of CSS classes that will be applied to the main content. This is the parent of the sidebar and page content. |
 | markdown | An object representing styles related to the markdown content. |
-| navigtion | An object representing styles related to the navigation content. |
+| navigation | An object representing styles related to the navigation content. |
 | page | A list of CSS classes that will be applied to the page content. |
 
 ### Markdown Styles
@@ -48,6 +61,12 @@ For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com
 | Property name | Description |
 | ------------- | ----------- |
 | navbar | A list of CSS classes that will be applied to navbar. |
+
+### Page Styles
+
+| Property name | Description |
+| ------------- | ----------- |
+| article | A list of CSS classes that will be applied to the article elements representing the page content. |
 | leftSidebar | An object representing styles related to the left side bar.  See the Sidebar Styles section. |
 
 #### Sidebar Styles

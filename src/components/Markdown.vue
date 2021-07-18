@@ -41,8 +41,8 @@ export default {
     }
   },
   created() {
-    preClasses = this.$root.settings.styles?.markdown?.pre
-    tableClasses = this.$root.settings.styles?.markdown?.table
+    preClasses = this.$root.settings.styles?.page?.markdown?.pre
+    tableClasses = this.$root.settings.styles?.page?.markdown?.table
     marked.use({ renderer })
     marked.setOptions({
       baseUrl: "#/"
