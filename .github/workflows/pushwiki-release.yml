@@ -27,18 +27,18 @@ jobs:
     - run: yarn build
 
     - name: Zip Full
-      run: 7z a bin\PushWiki-${{ env.VERSION }}-full.zip -tzip dist/*
+      run: 7z a ./bin/PushWiki-${{ env.VERSION }}-full.zip -tzip ./dist/*
 
     - run: yarn build-slim
 
     - name: Zip Slim
-      run: 7z a bin\PushWiki-${{ env.VERSION }}-slim.zip -tzip dist/*
+      run: 7z a ./bin/PushWiki-${{ env.VERSION }}-slim.zip -tzip ./dist/*
 
     - name: Upload binaries
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          bin\PushWiki-${{ env.VERSION }}-full.zip
-          bin\PushWiki-${{ env.VERSION }}-slim.zip
+          ./bin/PushWiki-${{ env.VERSION }}-full.zip
+          ./bin/PushWiki-${{ env.VERSION }}-slim.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
