@@ -9,10 +9,12 @@
     </article>
   </div>
   <div v-else>
-    <h1>Page Not Found</h1>
-    <p class="alert alert-secondary">
-      This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
-    </p>
+    <article class="page" :class="pageContentClasses">
+      <h1>Page Not Found</h1>
+      <p class="alert alert-secondary">
+        This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
+      </p>
+    </article>
   </div>
 </template>
 
