@@ -33,15 +33,15 @@ module.exports = {
           compiler.hooks.done.tap('InlinePlugin', (compilation) => {
             //Combine HTML and JS into a single deployment file
             fs.copyFileSync(path.resolve(__dirname, './dist/pushwiki.html'), path.resolve(__dirname, './dist/index.html'))
-            const scriptContents = fs.readFileSync(path.resolve(__dirname, './dist/pushwiki.js'), 'utf8')
-            const outputScriptContents = UglifyJS.minify(scriptContents).code.replace(/\$/g, '$$$$')
-            const htmlContents = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
-            const contents = htmlContents
-              .replace('<link href="pushwiki.js" rel="preload" as="script">', '')
-              .replace('<script src="pushwiki.js"></script>', '')
-              .replace('<script type="text/javascript" src="pushwiki.js"></script>', '')
-              .replace('<!-- built files will be auto injected -->', '<script type="text/javascript">\n      ' + outputScriptContents + '\n    </script>')
-            fs.writeFileSync(path.resolve(__dirname, './dist/index.html'), contents)
+            // const scriptContents = fs.readFileSync(path.resolve(__dirname, './dist/pushwiki.js'), 'utf8')
+            // const outputScriptContents = UglifyJS.minify(scriptContents).code.replace(/\$/g, '$$$$')
+            // const htmlContents = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
+            // const contents = htmlContents
+            //   .replace('<link href="pushwiki.js" rel="preload" as="script">', '')
+            //   .replace('<script src="pushwiki.js"></script>', '')
+            //   .replace('<script type="text/javascript" src="pushwiki.js"></script>', '')
+            //   .replace('<!-- built files will be auto injected -->', '<script type="text/javascript">\n      ' + outputScriptContents + '\n    </script>')
+            // fs.writeFileSync(path.resolve(__dirname, './dist/index.html'), contents)
           })
         }
       }
