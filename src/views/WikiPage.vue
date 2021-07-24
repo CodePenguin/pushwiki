@@ -4,7 +4,7 @@
   </div>
   <div v-else-if="content != null" class="row">
     <Sidebar sidebarType="left" :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
-    <article class="page" :class="pageContentClasses">
+    <article class="page" :class="articleClasses">
       <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
     </article>
   </div>
@@ -47,8 +47,8 @@ export default {
     })
   },
   computed: {
-    pageContentClasses () {
-      return this.$root.settings.styles?.page?.content
+    articleClasses () {
+      return this.$root.settings.styles?.page?.article ?? ''
     },
     sidebarIsVisible() {
       return this.tableOfContents.length > 1 || (this.tableOfContents.length === 1 && this.tableOfContents[0].level > 1)

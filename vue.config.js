@@ -11,8 +11,6 @@ module.exports = {
   configureWebpack: {
     externals: process.env.VUE_APP_BUNDLE_TYPE === 'slim' ? {
       axios: 'axios',
-      bootstrap: 'bootstrap',
-      bootswatch: 'bootswatch',
       'core-js': 'core-js',
       dompurify: 'DOMPurify',
       'highlightJS': 'hljs',
@@ -46,7 +44,6 @@ module.exports = {
     ],
     resolve: {
       alias: {
-        bootstrapCSS$: path.resolve(__dirname, './node_modules/bootswatch/dist/' + process.env.VUE_APP_BOOTSWATCH_THEME + '/bootstrap.min.css'),
         highlightCSS$: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css'),
         highlightJS$: process.env.VUE_APP_HIGHLIGHTJS_LIB !== 'all' ? path.resolve(__dirname, './node_modules/highlight.js/lib/' + process.env.VUE_APP_HIGHLIGHTJS_LIB) : 'highlight.js'
       }
