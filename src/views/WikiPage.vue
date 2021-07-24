@@ -1,15 +1,15 @@
 <template>
-  <div v-if="loading">
+  <div v-if="loading" :class="pageLoadingClasses">
     <Loading/>
   </div>
-  <div v-else-if="content != null" class="row">
+  <div v-else-if="content != null" :class="wikiPageClasses">
     <Sidebar sidebarType="left" :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
-    <article class="page" :class="articleClasses">
+    <article :class="articleClasses">
       <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
     </article>
   </div>
-  <div v-else>
-    <article class="page" :class="pageContentClasses">
+  <div v-else :class="pageNotFoundClasses">
+    <article :class="pageContentClasses">
       <h1>Page Not Found</h1>
       <p class="alert alert-secondary">
         This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
@@ -50,8 +50,17 @@ export default {
     articleClasses () {
       return this.$root.settings.styles?.page?.article
     },
+    pageLoadingClasses() {
+      return this.$root.settings.styles?.page?.pageLoading
+    },
+    pageNotFoundClasses() {
+      return this.$root.settings.styles?.page?.pageNotFound
+    },
     sidebarIsVisible() {
       return this.tableOfContents.length > 1 || (this.tableOfContents.length === 1 && this.tableOfContents[0].level > 1)
+    },
+    wikiPageClasses() {
+      return this.$root.settings.styles?.page?.wikiPage
     }
   },
   methods: {
