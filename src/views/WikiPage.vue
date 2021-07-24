@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     articleClasses () {
-      return this.$root.settings.styles?.page?.article ?? ''
+      return this.$root.settings.styles?.page?.article
     },
     sidebarIsVisible() {
       return this.tableOfContents.length > 1 || (this.tableOfContents.length === 1 && this.tableOfContents[0].level > 1)

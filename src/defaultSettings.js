@@ -10,7 +10,7 @@ export default {
   },
   styles: {
     body: "font-sans font-base font-normal leading-relaxed text-gray-800",
-    main: "container-fluid mt-5 pt-3",
+    main: "container px-4 grid grid-flow-col auto-cols-max",
     navigation: {
       button: "md:hidden flex items-center px-3 py-2 border rounded bg-blue-900 text-white p-1 hover:text-black hover:bg-gray-200",
       brand: "block h-6 md:h-",
@@ -19,14 +19,15 @@ export default {
       navLink: "block py-1 hover:underline text-gray-600 md:text-white"
     },
     page: {
-      article: "col p-3 prose",
+      article: "prose",
       markdown: {
         pre: "border p-1",
-        table: "table"
+        table: "table-auto"
       },
       leftSidebar: {
-        nav: "nav-pills col-md-4 col-lg-3 d-block bg-light nav nav-pills flex-column p-3 ps-0",
-        childNav: "nav-pills flex-column ms-3",
+        nav: "bg-green-100 border rounded px-3 py-3",
+        navLink: "bg-green-300",
+        childNav: "bg-red-100 pl-10"
       }
     }
   }

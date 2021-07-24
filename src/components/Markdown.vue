@@ -28,7 +28,7 @@ const renderer = {
     return `<h${level} id="${slug}">${text}</h${level}>`
   },
   table(header, body) {
-    return `<table class="table ${tableClasses}"><thead>${header}</thead><tbody>${body}</tbody></table>`
+    return `<table class="${tableClasses}"><thead>${header}</thead><tbody>${body}</tbody></table>`
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar nav" :class="navClasses">
+  <nav class="sidebar" :class="navClasses">
     <SidebarLink v-for="entry in nestedTableOfContents" :key="entry.slug" :entry="entry" :sidebarStyle="sidebarStyle"/>
   </nav>
 </template>

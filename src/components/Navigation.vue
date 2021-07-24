@@ -28,19 +28,19 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return this.settings.styles?.navigation?.button ?? ''
+      return this.settings.styles?.navigation?.button
     },
     brandClasses() {
-      return this.settings.styles?.navigation?.brand ?? ''
+      return this.settings.styles?.navigation?.brand
     },
     headerClasses() {
-      return this.settings.styles?.navigation?.header ?? ''
+      return this.settings.styles?.navigation?.header
     },
     navClasses() {
       return (this.settings.styles?.navigation?.nav ?? '') + (!this.navOpen ? ' hidden' : '')
     },
     navLinkClasses() {
-      return this.settings.styles?.navigation?.navLink ?? ''
+      return this.settings.styles?.navigation?.navLink
     },
     title() {
       return this.settings.title ?? 'PushWiki'
