@@ -19,19 +19,26 @@ export default {
       navLink: "block py-1 hover:underline text-gray-600 md:text-white"
     },
     page: {
-      article: "md:col-span-9 prose p-4 bg-green-100",
-      leftSidebar: {
-        nav: "px-3 py-3 md:col-span-3 bg-gray-100",
-        navLink: "",
-        childNav: "pl-10"
+      loading: {
+        content: ""
       },
-      markdown: {
-        pre: "border p-1",
-        table: "table-auto"
+      notFound: {
+        alert: "bg-gray-100 border-black p-4 rounded",
+        content: "p-4 prose"
       },
-      pageLoading: "",
-      pageNotFound: "",
-      wikiPage: "grid md:grid-cols-12 border-2 border-red-600"
+      wikiPage: {
+        article: "md:col-span-9 prose p-4",
+        content: "grid md:grid-cols-12",
+        markdown: {
+          pre: "border p-1",
+          table: "table-auto"
+        },
+        sidebar: {
+          nav: "px-3 py-3 md:col-span-3 bg-gray-100",
+          navLink: "block",
+          childNav: "pl-4"
+        }
+      }
     }
   }
 }

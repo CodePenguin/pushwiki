@@ -1,7 +1,7 @@
 <template>
   <a :class="navLinkClasses" :href="'#' + entry.slug">{{entry.text}}</a>
   <nav class="nav" :class="childNavClasses" v-if="entry.items.length > 0">
-    <SidebarLink :entry="subEntry" v-for="subEntry in entry.items" :key="subEntry.slug" :sidebarStyle="sidebarStyle" />
+    <SidebarLink :entry="subEntry" v-for="subEntry in entry.items" :key="subEntry.slug" />
   </nav>
 </template>
 
@@ -13,17 +13,16 @@ export default {
       type: Object,
       required: true
     },
-    sidebarStyle: {
-      type: Object,
-      required: true
+    sidebarStyles: {
+      type: Object
     }
   },
   computed: {
     childNavClasses() {
-      return this.sidebarStyle?.childNav
+      return this.sidebarStyles?.childNav
     },
     navLinkClasses() {
-      return this.sidebarStyle?.navLink
+      return this.sidebarStyles?.navLink
     }
   }
 }

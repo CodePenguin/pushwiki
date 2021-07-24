@@ -3,18 +3,16 @@
     <Loading/>
   </div>
   <div v-else-if="content != null" :class="wikiPageClasses">
-    <Sidebar sidebarType="left" :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
+    <Sidebar :sidebarStyles="sidebarStyles" :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
     <article :class="articleClasses">
       <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
     </article>
   </div>
   <div v-else :class="pageNotFoundClasses">
-    <article :class="pageContentClasses">
-      <h1>Page Not Found</h1>
-      <p class="alert alert-secondary">
-        This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
-      </p>
-    </article>
+    <h1>Page Not Found</h1>
+    <p :class="pageNotFoundAlertClasses">
+      This page does not exist yet!  Create a new file called "{{localPath}}" and refresh this page.
+    </p>
   </div>
 </template>
 
@@ -48,19 +46,25 @@ export default {
   },
   computed: {
     articleClasses () {
-      return this.$root.settings.styles?.page?.article
+      return this.$root.settings.styles?.page?.wikiPage?.article
     },
     pageLoadingClasses() {
-      return this.$root.settings.styles?.page?.pageLoading
+      return this.$root.settings.styles?.page?.loading?.content
     },
     pageNotFoundClasses() {
-      return this.$root.settings.styles?.page?.pageNotFound
+      return this.$root.settings.styles?.page?.notFound?.content
+    },
+    pageNotFoundAlertClasses() {
+      return this.$root.settings.styles?.page?.notFound?.alert
     },
     sidebarIsVisible() {
       return this.tableOfContents.length > 1 || (this.tableOfContents.length === 1 && this.tableOfContents[0].level > 1)
     },
+    sidebarStyles() {
+      return this.$root.settings.styles?.page?.wikiPage?.sidebar
+    },
     wikiPageClasses() {
-      return this.$root.settings.styles?.page?.wikiPage
+      return this.$root.settings.styles?.page?.wikiPage?.content
     }
   },
   methods: {

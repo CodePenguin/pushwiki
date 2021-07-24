@@ -1,6 +1,6 @@
 <template>
   <nav class="sidebar" :class="navClasses">
-    <SidebarLink v-for="entry in nestedTableOfContents" :key="entry.slug" :entry="entry" :sidebarStyle="sidebarStyle"/>
+    <SidebarLink v-for="entry in nestedTableOfContents" :key="entry.slug" :entry="entry" :sidebarStyles="sidebarStyles" />
   </nav>
 </template>
 
@@ -10,9 +10,8 @@ import SidebarLink from '@/components/SidebarLink.vue'
 export default {
   name: "Sidebar",
   props: {
-    sidebarType: {
-      type: String,
-      required: true
+    sidebarStyles: {
+      type: Object
     },
     tableOfContents: {
       type: Array
@@ -52,13 +51,7 @@ export default {
       return list
     },
     navClasses() {
-      return this.sidebarStyle?.nav
-    },
-    sidebarStyle() {
-      switch (this.sidebarType) {
-        case 'left': return this.$root.settings.styles?.page?.leftSidebar
-        default: return null
-      }
+      return this.sidebarStyles?.nav
     }
   },
   mounted() {
