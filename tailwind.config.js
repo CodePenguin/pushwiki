@@ -2,7 +2,15 @@ module.exports = {
   purge: { content: ['./public/**/*.html', './src/**/*.vue'] },
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.700')
+          }
+        }
+      })
+    },
   },
   variants: {
     extend: {},
