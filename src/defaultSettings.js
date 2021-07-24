@@ -34,8 +34,8 @@ export default {
           table: "table-auto"
         },
         sidebar: {
-          nav: "px-3 py-3 md:col-span-3 bg-gray-100",
-          navLink: "block",
+          nav: "px-3 py-3 md:col-span-3 bg-gray-100 m-3 rounded md:m-0 md:rounded-none",
+          navLink: "block hover:underline",
           childNav: "pl-4"
         }
       }
