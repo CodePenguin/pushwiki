@@ -53,6 +53,11 @@ export default {
     toggleNav() {
       this.navOpen = !this.navOpen
     }
+  },
+  watch: {
+    $route() {
+      this.navOpen = false
+    }
   }
 }
 </script>

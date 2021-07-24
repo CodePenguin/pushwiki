@@ -1,7 +1,7 @@
 <template>
   <a :class="navLinkClasses" :href="'#' + entry.slug">{{entry.text}}</a>
   <nav class="nav" :class="childNavClasses" v-if="entry.items.length > 0">
-    <SidebarLink :entry="subEntry" v-for="subEntry in entry.items" :key="subEntry.slug" />
+    <SidebarLink :entry="subEntry" v-for="subEntry in entry.items" :key="subEntry.slug" :sidebarStyles="sidebarStyles" />
   </nav>
 </template>
 
