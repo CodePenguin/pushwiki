@@ -15,6 +15,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@tailwindcss/typography": "^0.4.1",
     "@types/dompurify": "^2.2.3",
     "@types/highlightjs": "^9.12.2",
     "@types/marked": "^2.0.4",
