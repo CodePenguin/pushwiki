@@ -24,10 +24,10 @@ export default {
       },
       notFound: {
         alert: "bg-gray-100 border-black p-4 rounded",
-        content: "p-4 prose"
+        content: "p-4 prose prose-blue"
       },
       wikiPage: {
-        article: "md:col-span-9 prose p-4",
+        article: "md:col-span-9 prose prose-blue p-4",
         content: "grid md:grid-cols-12",
         markdown: {
           pre: "border p-1",

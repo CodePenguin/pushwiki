@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     mainClasses() {
-      return this.settings.styles?.main
+      return this.settings.styles?.main ?? ''
     }
   },
   methods: {

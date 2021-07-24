@@ -19,10 +19,10 @@ export default {
   },
   computed: {
     childNavClasses() {
-      return this.sidebarStyles?.childNav
+      return this.sidebarStyles?.childNav ?? ''
     },
     navLinkClasses() {
-      return this.sidebarStyles?.navLink
+      return this.sidebarStyles?.navLink ?? ''
     }
   }
 }
