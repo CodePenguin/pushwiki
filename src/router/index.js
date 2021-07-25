@@ -33,7 +33,8 @@ const router = createRouter({
     }
     if (to.hash) {
       var header = document.querySelector('header')
-      var offset = header?.classList?.contains('fixed-top') ? header.clientHeight : 0
+      let isHeaderSticky = getComputedStyle(header).position === 'sticky'
+      var offset = isHeaderSticky ? header.clientHeight : 0
       let element = document.querySelector(to.hash)
       window.scroll({ top: (element.offsetTop - offset), left: 0, behavior: 'auto' })
     }

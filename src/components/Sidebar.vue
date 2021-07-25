@@ -1,11 +1,11 @@
 <template>
   <nav class="sidebar" :class="navClasses">
-    <SidebarLink v-for="entry in nestedTableOfContents" :key="entry.slug" :entry="entry" :sidebarStyles="sidebarStyles" />
+    <SidebarLinks :entries="nestedTableOfContents" :nested="false" :sidebarStyles="sidebarStyles" />
   </nav>
 </template>
 
 <script>
-import SidebarLink from '@/components/SidebarLink.vue'
+import SidebarLinks from '@/components/SidebarLinks.vue'
 
 export default {
   name: "Sidebar",
@@ -21,7 +21,7 @@ export default {
     this.$root.updateRouterAnchors('.sidebar')
   },
   components: {
-    SidebarLink
+    SidebarLinks
   },
   computed: {
     nestedTableOfContents() {
@@ -31,14 +31,14 @@ export default {
       lowLevel = lowLevel || 1
 
       const readEntry = (startingIndex, list) => {
-        const entry = Object.assign({items: []}, this.tableOfContents[startingIndex])
+        const entry = Object.assign({entries: []}, this.tableOfContents[startingIndex])
         if (entry.level < lowLevel || entry.level > highLevel) return startingIndex + 1
         list.push(entry)
         let nextIndex = startingIndex + 1
         while (nextIndex < this.tableOfContents.length) {
           let nextEntry = this.tableOfContents[nextIndex]
           if (nextEntry.level <= entry.level) break
-          nextIndex = readEntry(nextIndex, entry.items)
+          nextIndex = readEntry(nextIndex, entry.entries)
         }
         return nextIndex
       }
