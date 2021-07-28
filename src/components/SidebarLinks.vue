@@ -7,8 +7,10 @@
   </ul>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: "SidebarLinks",
   props: {
     entries: {
@@ -34,5 +36,5 @@ export default {
       return (!this.nested ? this.sidebarStyles?.ul : this.sidebarStyles?.ulNested) ?? ''
     }
   }
-}
+})
 </script>

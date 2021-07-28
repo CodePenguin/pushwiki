@@ -2,7 +2,9 @@
     <div class="markdown" v-html="compiledContent" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import DOMPurify from 'dompurify'
 import hljs from 'highlightJS'
 import marked from "marked"
@@ -32,7 +34,7 @@ const renderer = {
   }
 }
 
-export default {
+export default defineComponent({
   name: 'Markdown',
   props: {
     content: {
@@ -72,5 +74,5 @@ export default {
   updated() {
     this.processContent()
   }
-}
+})
 </script>

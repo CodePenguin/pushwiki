@@ -7,13 +7,15 @@
   </article>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'NotFoundPage',
   computed: {
     pageContentClasses() {
       return this.$root.settings.styles?.page?.notFound.content
     }
   }
-}
+})
 </script>

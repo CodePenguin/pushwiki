@@ -10,10 +10,11 @@
   </article>
 </template>
 
-<script>
-import defaultSettings from '@/defaultSettings.js'
+<script lang="ts">
+import { defineComponent } from 'vue';
+import defaultSettings from '@/defaultSettings'
 
-export default {
+export default defineComponent({
   name: 'SettingsPage',
   computed: {
     pageContentClasses() {
@@ -26,5 +27,5 @@ export default {
       return defaultSettings
     }
   }
-}
+})
 </script>

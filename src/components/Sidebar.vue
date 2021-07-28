@@ -4,10 +4,12 @@
   </nav>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import SidebarLinks from '@/components/SidebarLinks.vue'
 
-export default {
+export default defineComponent({
   name: "Sidebar",
   props: {
     sidebarStyles: {
@@ -60,5 +62,5 @@ export default {
   updated() {
     this.$root.updateRouterAnchors('.sidebar')
   }
-}
+})
 </script>

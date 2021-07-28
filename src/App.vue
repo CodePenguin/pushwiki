@@ -17,7 +17,7 @@
 <script>
 import Loading from '@/components/Loading.vue'
 import Navigation from '@/components/Navigation.vue'
-import defaultSettings from '@/defaultSettings.js'
+import defaultSettings from '@/defaultSettings'
 const axios = require('axios').default
 
 export default {

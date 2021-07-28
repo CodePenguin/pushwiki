@@ -38,10 +38,12 @@ const router = createRouter({
       return savedPosition
     }
     if (to.hash) {
-      var header = document.querySelector('header')
-      let isHeaderSticky = getComputedStyle(header).position === 'sticky'
-      var offset = isHeaderSticky ? header.clientHeight : 0
-      let element = document.querySelector(to.hash)
+      const header = document.querySelector('header')
+      if (header == null) return false
+      const isHeaderSticky = getComputedStyle(header).position === 'sticky'
+      const offset = isHeaderSticky ? header.clientHeight : 0
+      const element = document.querySelector(to.hash) as HTMLElement
+      if (element == null) return
       window.scroll({ top: (element.offsetTop - offset), left: 0, behavior: 'auto' })
     }
     return false

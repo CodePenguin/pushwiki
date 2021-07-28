@@ -16,13 +16,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import Loading from '@/components/Loading.vue'
 import Markdown from '@/components/Markdown.vue'
 import Sidebar from '@/components/Sidebar.vue'
 const axios = require('axios').default
 
-export default {
+export default defineComponent({
   name: 'WikiPage',
   data() {
     return {
@@ -108,5 +109,5 @@ export default {
       })
     }
   }
-}
+})
 </script>

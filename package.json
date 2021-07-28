@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
-    "serve-dist": "http-server ./dist",
     "build": "vue-cli-service build",
-    "build-slim": "vue-cli-service build --mode=slim",
+    "lint": "vue-cli-service lint",
     "build-report": "vue-cli-service build --report",
+    "build-slim": "vue-cli-service build --mode=slim",
     "build-slim-report": "vue-cli-service build --report --mode=slim",
-    "lint": "vue-cli-service lint"
+    "serve-dist": "http-server ./dist",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
-    "@popperjs/core": "^2.9.2",
     "@tailwindcss/typography": "^0.4.1",
     "@types/dompurify": "^2.2.3",
     "@types/highlightjs": "^9.12.2",
@@ -31,14 +30,19 @@
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "typescript": "~4.1.5"
   },
   "eslintConfig": {
     "root": true,
@@ -47,10 +51,11 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/typescript"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@typescript-eslint/parser"
     },
     "rules": {}
   },
