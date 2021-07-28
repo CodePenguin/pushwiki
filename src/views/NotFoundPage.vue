@@ -11,8 +11,8 @@
 export default {
   name: 'NotFoundPage',
   computed: {
-    pageContentClasses () {
-      return this.$root.settings.styles?.page?.content
+    pageContentClasses() {
+      return this.$root.settings.styles?.page?.notFound.content
     }
   }
 }

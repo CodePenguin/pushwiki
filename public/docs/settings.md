@@ -1,6 +1,6 @@
 # Settings
 
-The "pushwiki.json" file allows you to change various aspects of PushWiki.
+The "pushwiki.json" file allows you to change various aspects of PushWiki.  [Click here](pushwiki/settings) to see your current settings.
 
 For CSS classes, refer to the [Bootstrap documentation](https://getbootstrap.com/docs/5.0/content/tables/).
 

@@ -26,8 +26,11 @@ export default {
         alert: "bg-gray-100 border-black p-4 rounded",
         content: "p-4 prose max-w-none prose-blue"
       },
+      settings: {
+        content: "p-4 prose max-w-none prose-blue"
+      },
       wikiPage: {
-        article: "md:col-span-9 xl:col-span-10 prose max-w-0 prose-blue p-4",
+        article: "md:col-span-9 xl:col-span-10 prose max-w-none prose-blue p-4",
         content: "md:grid md:grid-cols-12",
         markdown: {
           pre: "border p-1",
