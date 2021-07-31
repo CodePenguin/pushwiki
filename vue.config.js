@@ -28,7 +28,8 @@ module.exports = {
     plugins: [
       {
         apply: (compiler) => {
-          compiler.hooks.done.tap('InlinePlugin', (compilation) => {
+          compiler.hooks.done.tap('InlinePlugin', () => {
+            if (process.env.NODE_ENV !== 'production') return
             //Combine HTML and JS into a single deployment file
             fs.copyFileSync(path.resolve(__dirname, './dist/pushwiki.html'), path.resolve(__dirname, './dist/index.html'))
             const scriptContents = fs.readFileSync(path.resolve(__dirname, './dist/pushwiki.js'), 'utf8')
