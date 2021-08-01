@@ -6,7 +6,7 @@
 import { computed, defineComponent, onMounted, onUpdated } from 'vue'
 
 import DOMPurify from 'dompurify'
-import hljs from 'highlight.js'
+import hljs from 'highlight.js/lib/common'
 import marked from 'marked'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
