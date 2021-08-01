@@ -44,7 +44,7 @@ export default defineComponent({
         return nextIndex
       }
 
-      const list = []
+      const list = new Array<TableOfContentsEntry>()
       let nextIndex = 0
       while (nextIndex < tableOfContents.length) {
         nextIndex = readEntry(nextIndex, list)
