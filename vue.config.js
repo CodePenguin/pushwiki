@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const UglifyJS = require("uglify-js")
+const UglifyJS = require('uglify-js')
 
 module.exports = {
   indexPath: 'pushwiki.html',
@@ -9,15 +9,18 @@ module.exports = {
     extract: false
   },
   configureWebpack: {
-    externals: process.env.VUE_APP_BUNDLE_TYPE === 'slim' ? {
-      axios: 'axios',
-      'core-js': 'core-js',
-      dompurify: 'DOMPurify',
-      'highlightJS': 'hljs',
-      marked: 'marked',
-      vue: 'Vue',
-      'vue-router': 'VueRouter'
-    } : {},
+    externals:
+      process.env.VUE_APP_BUNDLE_TYPE === 'slim'
+        ? {
+            axios: 'axios',
+            'core-js': 'core-js',
+            dompurify: 'DOMPurify',
+            highlightJS: 'hljs',
+            marked: 'marked',
+            vue: 'Vue',
+            'vue-router': 'VueRouter'
+          }
+        : {},
     optimization: {
       splitChunks: false
     },
@@ -28,6 +31,7 @@ module.exports = {
     plugins: [
       {
         apply: (compiler) => {
+          if (process.env.NODE_ENV !== 'production') return
           compiler.hooks.done.tap('InlinePlugin', () => {
             if (process.env.NODE_ENV !== 'production') return
             //Combine HTML and JS into a single deployment file
@@ -45,27 +49,22 @@ module.exports = {
     ],
     resolve: {
       alias: {
-        highlightCSS$: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css'),
-        highlightJS$: process.env.VUE_APP_HIGHLIGHTJS_LIB !== 'all' ? path.resolve(__dirname, './node_modules/highlight.js/lib/' + process.env.VUE_APP_HIGHLIGHTJS_LIB) : 'highlight.js'
+        highlightCSS$: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css')
       }
     }
   },
-  chainWebpack: config => {
-    config
-      .plugin('html')
-      .tap(args => {
-        args[0].title = 'PushWiki'
-        if (process.env.VUE_APP_BUNDLE_TYPE === 'slim') {
-          args[0].template = args[0].template.replace('.html', '.slim.html')
-        }
-        return args
-      })
+  chainWebpack: (config) => {
+    config.plugin('html').tap((args) => {
+      args[0].title = 'PushWiki'
+      if (process.env.VUE_APP_BUNDLE_TYPE === 'slim') {
+        args[0].template = args[0].template.replace('.html', '.slim.html')
+      }
+      return args
+    })
 
-    config
-      .plugin('copy')
-      .tap(([options])=> {
-        options[0].ignore.push('index.slim.html')
-        return [options]
-      })
+    config.plugin('copy').tap(([options]) => {
+      options[0].ignore.push('index.slim.html')
+      return [options]
+    })
   }
 }

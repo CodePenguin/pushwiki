@@ -1,4 +1,6 @@
-export default {
+import ISettings from '@/interfaces/ISettings'
+
+const defaultSettings: ISettings = {
   title: "PushWiki",
   navigation: {
     links: []
@@ -48,3 +50,4 @@ export default {
     }
   }
 }
+export default defaultSettings

@@ -1,9 +1,9 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import NotFoundPage from '../views/NotFoundPage.vue'
 import SettingsPage from '../views/SettingsPage.vue'
 import WikiPage from '../views/WikiPage.vue'
 
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',

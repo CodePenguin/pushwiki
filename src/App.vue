@@ -3,7 +3,7 @@
     <Loading />
   </div>
   <div v-else>
-    <Navigation :settings="settings" />
+    <Navigation />
     <main :class="mainClasses">
       <router-view v-slot="{ Component }">
         <transition @after-leave="transitionDone">
@@ -14,88 +14,81 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, defineComponent, provide, nextTick, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import AppRoot from '@/classes/AppRoot'
+import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import ISettings from '@/interfaces/ISettings'
 import Loading from '@/components/Loading.vue'
 import Navigation from '@/components/Navigation.vue'
-import defaultSettings from '@/defaultSettings'
-const axios = require('axios').default
+import DefaultSettings from '@/classes/DefaultSettings'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 
-export default {
-  data() {
-    return {
-      loaded: false,
-      settings: defaultSettings
-    }
-  },
+export default defineComponent({
   components: {
     Loading,
     Navigation
   },
-  created() {
-    axios.get("pushwiki.json")
-      .then(response => {
-        this.settings = Object.assign({}, defaultSettings, response.data)
-        this.loaded = true
-        this.setDocumentClasses()
-        this.setSubTitle()
-      })
-      .catch(error => {
-        if (error.response?.status != 404) {
-          console.log("Error retrieving settings", error)
-        }
-        this.loaded = true
-      })
-  },
-  computed: {
-    mainClasses() {
-      return this.settings.styles?.main ?? ''
-    }
-  },
-  methods: {
-    setDocumentClasses() {
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
+
+    const loaded = ref(false)
+    const settings = ref<ISettings>(DefaultSettings)
+    const root = new AppRoot(router, settings)
+
+    provide<IAppRoot>(AppRootKey, root)
+    provide('settings', settings)
+
+    let mainClasses = computed(() => settings.value.styles?.main ?? '')
+
+    function setDocumentClasses() {
       // Body Classes
-      let classes = (this.settings.styles?.body ?? '').split(' ')
-      classes.forEach(c => { 
-        if (c !== '') document.body.classList.add(c) 
+      let classes = (settings.value.styles.body ?? '').split(' ')
+      classes.forEach((c: string) => {
+        if (c !== '') document.body.classList.add(c)
       })
-    },
-    setSubTitle(subtitle) {
-      document.title = this.settings.title + (subtitle ? ' - ' + subtitle : '')
-    },
-    transitionDone () {
-      if (this.$route.hash) {
-        this.$nextTick(() => {
-          let header = document.querySelector('header')
+    }
+
+    function setSubTitle(subtitle: string) {
+      document.title = settings.value.title + (subtitle ? ' - ' + subtitle : '')
+    }
+
+    function transitionDone() {
+      if (route.hash) {
+        nextTick(() => {
+          let header = document.querySelector<HTMLElement>('header')
+          if (header == null) return
           let isHeaderSticky = getComputedStyle(header).position === 'sticky'
           let offset = isHeaderSticky ? header.clientHeight : 0
-          let element = document.querySelector(this.$route.hash)
-          window.scroll({ top: (element.offsetTop - offset), left: 0, behavior: 'auto' })
+          let element = document.querySelector<HTMLElement>(route.hash)
+          if (element == null) return
+          window.scroll({
+            top: element.offsetTop - offset,
+            left: 0,
+            behavior: 'auto'
+          })
         })
       }
-    },
-    updateRouterAnchors(baseSelector) {
-      let pageHash = window.location.hash ?? '#/'
-      let internalHashIndex = pageHash.indexOf('#', 1)
-      if (internalHashIndex > -1) {
-        pageHash = pageHash.substring(0, internalHashIndex)
-      }
-      var links = document.querySelectorAll(baseSelector + ' a')
-      links.forEach(link => {
-        if (!link.href) return
-        let href = link.getAttribute('href')
-        if (!href.startsWith('#')) return
-        if (href.match(/^#[\w-]+$/)) {
-          href = pageHash + href
-          link.href = href
-        }
-        if (href.startsWith(pageHash)) {
-          link.onclick = event => {
-            event.preventDefault()
-            this.$router.push(href.substring(1))
-          }
-        }
-      })
     }
+
+    axios
+      .get('pushwiki.json')
+      .then((response: AxiosResponse) => {
+        settings.value = Object.assign({}, DefaultSettings, response.data)
+        loaded.value = true
+        setDocumentClasses()
+        setSubTitle('')
+      })
+      .catch((error: AxiosError) => {
+        if (error.response?.status != 404) {
+          console.log('Error retrieving settings', error)
+        }
+        loaded.value = true
+      })
+
+    return { loaded, mainClasses, transitionDone }
   }
-}
+})
 </script>
