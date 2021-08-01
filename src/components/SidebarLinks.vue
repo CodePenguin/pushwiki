@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 import ISettings from '@/interfaces/ISettings'
-import { computed, defineComponent, inject, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   name: 'SidebarLinks',
@@ -29,7 +29,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
 
     let sidebarStyles = computed(() => root.settings.styles.page.wikiPage.sidebar)
     let liClasses = computed(() => (!props.nested ? sidebarStyles.value.li : sidebarStyles.value.liNested))

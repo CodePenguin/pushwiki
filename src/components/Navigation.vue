@@ -16,15 +16,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import ISettings from '@/interfaces/ISettings'
 import { useRoute } from 'vue-router'
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 
 export default defineComponent({
   name: 'Navigation',
   setup() {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
     const route = useRoute()
 
     const navOpen = ref(false)

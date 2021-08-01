@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, onMounted, onUpdated } from 'vue'
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { computed, defineComponent, onMounted, onUpdated, PropType } from 'vue'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 import SidebarLinks from '@/components/SidebarLinks.vue'
 import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 
@@ -21,14 +21,14 @@ export default defineComponent({
     SidebarLinks
   },
   setup(props) {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
     const settings = root.settings
 
     let nestedTableOfContents = computed(() => {
       const tableOfContents = props.tableOfContents as Array<TableOfContentsEntry>
       const match = root.settings.page.sidebar.headerLevels.match(/^([1-6])(?:-([1-6]))?$/)
-      let lowLevel = parseInt(match?.length > 2 ? match[1] : null)
-      const highLevel = parseInt(match?.length > 2 ? match[2] : null) || lowLevel || 6
+      let lowLevel = parseInt(match && match.length > 2 ? match[1] : '')
+      const highLevel = parseInt(match && match.length > 2 ? match[2] : '') || lowLevel || 6
       lowLevel = lowLevel || 1
 
       const readEntry = (startingIndex: number, list: any[]) => {

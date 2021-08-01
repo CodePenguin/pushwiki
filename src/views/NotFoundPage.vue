@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
-import { computed, defineComponent, inject } from 'vue'
+import { useAppRoot } from '@/interfaces/IAppRoot'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'NotFoundPage',
   setup() {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
 
     let pageContentClasses = computed(() => root.settings.styles.page.notFound.content)
 

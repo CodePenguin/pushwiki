@@ -1,4 +1,4 @@
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { IAppRoot } from '@/interfaces/IAppRoot'
 import ISettings from '@/interfaces/ISettings'
 import { Ref } from 'vue'
 import { Router } from 'vue-router'

@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onMounted, onUpdated } from 'vue'
+import { computed, defineComponent, onMounted, onUpdated } from 'vue'
 
 import DOMPurify from 'dompurify'
 import hljs from 'highlight.js'
 import marked from 'marked'
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 
 export default defineComponent({
@@ -19,7 +19,7 @@ export default defineComponent({
     }
   },
   setup(props, { emit }) {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
 
     let mainHeading: string | null = null
     let contentUpdated = false

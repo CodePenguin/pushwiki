@@ -11,14 +11,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent } from 'vue'
 import DefaultSettings from '@/classes/DefaultSettings'
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 
 export default defineComponent({
   name: 'SettingsPage',
   setup() {
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
 
     let currentSettings = computed(() => root.settings)
     let defaultSettings = computed(() => DefaultSettings)

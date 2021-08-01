@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import Loading from '@/components/Loading.vue'
 import Markdown from '@/components/Markdown.vue'
 import Sidebar from '@/components/Sidebar.vue'
 import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
+import { useAppRoot } from '@/interfaces/IAppRoot'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute()
-    const root = inject<IAppRoot>(AppRootKey)
+    const root = useAppRoot()
 
     const loading = ref(true)
     const localPath = ref('')
@@ -50,9 +50,9 @@ export default defineComponent({
 
     function handleError(newLocalPath: string, error: AxiosError) {
       localPath.value = newLocalPath
-      content.value = null
+      content.value = ''
       loading.value = false
-      if (error.response.status != 404) {
+      if (error?.response?.status != 404) {
         console.log('Error retrieving content', error)
       }
     }
