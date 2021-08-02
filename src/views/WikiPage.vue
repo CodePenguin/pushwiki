@@ -2,7 +2,7 @@
   <div v-if="loading" :class="pageLoadingClasses">
     <Loading />
   </div>
-  <div v-else-if="content != null" :class="wikiPageClasses">
+  <div v-else-if="hasContent" :class="wikiPageClasses">
     <Sidebar :tableOfContents="tableOfContents" v-if="sidebarIsVisible" />
     <article :class="articleClasses">
       <Markdown :content="content" v-on:content-title="setSubTitle" v-on:table-of-contents="setTableOfContents" />
@@ -42,6 +42,7 @@ export default defineComponent({
     const tableOfContents = ref<Array<TableOfContentsEntry>>([])
 
     const articleClasses = computed(() => root.settings.styles.page.wikiPage.article)
+    const hasContent = computed(() => content.value !== '')
     const pageLoadingClasses = computed(() => root.settings.styles.page.loading.content)
     const pageNotFoundClasses = computed(() => root.settings.styles.page.notFound.content)
     const pageNotFoundAlertClasses = computed(() => root.settings.styles.page.notFound.alert)
@@ -95,6 +96,7 @@ export default defineComponent({
     return {
       articleClasses,
       content,
+      hasContent,
       loading,
       localPath,
       pageLoadingClasses,
