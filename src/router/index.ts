@@ -3,6 +3,8 @@ import NotFoundPage from '../views/NotFoundPage.vue'
 import SettingsPage from '../views/SettingsPage.vue'
 import WikiPage from '../views/WikiPage.vue'
 
+const PAGE_REGEX = '[\\w-/%]+'
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -15,12 +17,12 @@ const routes: Array<RouteRecordRaw> = [
     component: SettingsPage
   },
   {
-    path: '/:path([\\w-/]+\\.md)',
+    path: '/:path(' + PAGE_REGEX + '\\.md)',
     name: 'wiki-page-md',
     component: WikiPage,
   },
   {
-    path: '/:path([\\w-/]+)',
+    path: '/:path(' + PAGE_REGEX + ')',
     name: 'wiki-page',
     component: WikiPage,
   },
@@ -33,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
