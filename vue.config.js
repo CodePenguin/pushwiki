@@ -15,7 +15,7 @@ module.exports = {
             axios: 'axios',
             'core-js': 'core-js',
             dompurify: 'DOMPurify',
-            highlightJS: 'hljs',
+            'highlight.js/lib/common': 'hljs',
             marked: 'marked',
             vue: 'Vue',
             'vue-router': 'VueRouter'
