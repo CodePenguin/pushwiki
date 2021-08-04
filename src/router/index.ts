@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import NotFoundPage from '../views/NotFoundPage.vue'
 import SettingsPage from '../views/SettingsPage.vue'
 import WikiPage from '../views/WikiPage.vue'
+import { scrollToHash } from '@/classes/Utils'
 
 const PAGE_REGEX = '[\\w-/%]+'
 
@@ -39,16 +40,8 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     }
-    if (to.hash) {
-      const header = document.querySelector('header')
-      if (header == null) return false
-      const isHeaderSticky = getComputedStyle(header).position === 'sticky'
-      const offset = isHeaderSticky ? header.clientHeight : 0
-      const element = document.querySelector(to.hash) as HTMLElement
-      if (element == null) return
-      window.scroll({ top: (element.offsetTop - offset), left: 0, behavior: 'auto' })
-    }
-    return false
+    if (!to.hash) return false
+    scrollToHash(to.hash)
   }
 })
 

@@ -24,6 +24,7 @@ import Loading from '@/components/Loading.vue'
 import Navigation from '@/components/Navigation.vue'
 import DefaultSettings from '@/classes/DefaultSettings'
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import { scrollToHash } from '@/classes/Utils'
 
 export default defineComponent({
   components: {
@@ -57,19 +58,7 @@ export default defineComponent({
 
     function transitionDone() {
       if (route.hash) {
-        nextTick(() => {
-          let header = document.querySelector<HTMLElement>('header')
-          if (header == null) return
-          let isHeaderSticky = getComputedStyle(header).position === 'sticky'
-          let offset = isHeaderSticky ? header.clientHeight : 0
-          let element = document.querySelector<HTMLElement>(route.hash)
-          if (element == null) return
-          window.scroll({
-            top: element.offsetTop - offset,
-            left: 0,
-            behavior: 'auto'
-          })
-        })
+        nextTick(() => scrollToHash(route.hash))
       }
     }
 
