@@ -39,12 +39,19 @@
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
+    "prettier": "^2.2.1",
     "typescript": "~4.1.5",
     "vue-cli-plugin-tailwind": "~2.0.6"
+  },
+  "babel": {
+    "presets": [
+      "@vue/cli-plugin-babel/preset"
+    ]
   },
   "eslintConfig": {
     "root": true,
@@ -54,10 +61,15 @@
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended",
-      "@vue/typescript"
+      "@vue/typescript/recommended",
+      "@vue/prettier",
+      "@vue/prettier/@typescript-eslint"
+    ],
+    "ignorePatterns": [
+      "src/tailwind.css"
     ],
     "parserOptions": {
-      "parser": "@typescript-eslint/parser"
+      "ecmaVersion": 2020
     },
     "rules": {}
   },
@@ -65,5 +77,32 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "auto",
+    "printWidth": 180,
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 2,
+    "useTabs": false,
+    "trailingComma": "none",
+    "overrides": [
+      {
+        "files": [
+          "*.html"
+        ],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
+  }
 }
