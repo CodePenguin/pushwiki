@@ -5,12 +5,12 @@ export default interface ISettings {
       title: string
       path: string
     }>
-  },
+  }
   page: {
     sidebar: {
       headerLevels: string
     }
-  },
+  }
   styles: {
     body: string
     main: string
@@ -20,25 +20,25 @@ export default interface ISettings {
       header: string
       nav: string
       navLink: string
-    },
+    }
     page: {
       loading: {
         content: string
-      },
+      }
       notFound: {
         alert: string
         content: string
-      },
+      }
       settings: {
         content: string
-      },
+      }
       wikiPage: {
         article: string
         content: string
         markdown: {
           pre: string
           table: string
-        },
+        }
         sidebar: {
           li: string
           liNested: string

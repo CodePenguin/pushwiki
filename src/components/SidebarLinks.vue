@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts">
+import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 import ISettings from '@/interfaces/ISettings'
 import { computed, defineComponent, PropType } from 'vue'
@@ -16,7 +17,7 @@ export default defineComponent({
   name: 'SidebarLinks',
   props: {
     entries: {
-      type: Array,
+      type: Array as PropType<Array<TableOfContentsEntry>>,
       required: true
     },
     nested: {

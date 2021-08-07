@@ -31,7 +31,7 @@ export default defineComponent({
       const highLevel = parseInt(match && match.length > 2 ? match[2] : '') || lowLevel || 6
       lowLevel = lowLevel || 1
 
-      const readEntry = (startingIndex: number, list: any[]) => {
+      const readEntry = (startingIndex: number, list: Array<TableOfContentsEntry>) => {
         const entry = tableOfContents[startingIndex]
         if (entry.level < lowLevel || entry.level > highLevel) return startingIndex + 1
         list.push(entry)

@@ -10,9 +10,9 @@ export interface IAppRoot {
 }
 
 export function useAppRoot(): IAppRoot {
-  const resolved = inject(AppRootKey);
+  const resolved = inject(AppRootKey)
   if (!resolved) {
-    throw new Error(`Could not resolve ${AppRootKey.description}`);
+    throw new Error(`Could not resolve ${AppRootKey.description}`)
   }
-  return resolved;
+  return resolved
 }

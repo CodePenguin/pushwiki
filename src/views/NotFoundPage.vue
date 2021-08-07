@@ -1,9 +1,7 @@
 <template>
   <article class="page" :class="pageContentClasses">
     <h1>Page Not Found</h1>
-    <p class="alert alert-danger">
-      This page does not exist.
-    </p>
+    <p class="alert alert-danger">This page does not exist.</p>
   </article>
 </template>
 

@@ -7,7 +7,7 @@ export default class AppRoot implements IAppRoot {
   private _router: Router
   private _settings: Ref<ISettings>
 
-  get settings() {
+  get settings(): ISettings {
     return this._settings.value
   }
 
@@ -16,18 +16,18 @@ export default class AppRoot implements IAppRoot {
     this._settings = settings
   }
 
-  setSubTitle(subtitle: string) {
+  setSubTitle(subtitle: string): void {
     document.title = this._settings.value.title + (subtitle ? ' - ' + subtitle : '')
   }
 
-  updateRouterAnchors(baseSelector: string) {
+  updateRouterAnchors(baseSelector: string): void {
     let pageHash = window.location.hash ?? '#/'
     const internalHashIndex = pageHash.indexOf('#', 1)
     if (internalHashIndex > -1) {
       pageHash = pageHash.substring(0, internalHashIndex)
     }
     const links = document.querySelectorAll<HTMLAnchorElement>(baseSelector + ' a')
-    links.forEach(link => {
+    links.forEach((link) => {
       let href = link.getAttribute('href') ?? ''
       if (!href.startsWith('#')) return
       if (href.match(/^#[\w-]+$/)) {
@@ -35,7 +35,7 @@ export default class AppRoot implements IAppRoot {
         link.href = href
       }
       if (href.startsWith(pageHash)) {
-        link.onclick = event => {
+        link.onclick = (event) => {
           event.preventDefault()
           this._router.push(href.substring(1))
         }

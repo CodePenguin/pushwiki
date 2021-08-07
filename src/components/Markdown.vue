@@ -25,7 +25,7 @@ export default defineComponent({
     let contentUpdated = false
     let preClasses = ''
     let tableClasses = ''
-    let tableOfContents: TableOfContentsEntry[] = []
+    let tableOfContents: Array<TableOfContentsEntry> = []
 
     const renderer = {
       code(code, infostring) {

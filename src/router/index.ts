@@ -20,12 +20,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:path(' + PAGE_REGEX + '\\.md)',
     name: 'wiki-page-md',
-    component: WikiPage,
+    component: WikiPage
   },
   {
     path: '/:path(' + PAGE_REGEX + ')',
     name: 'wiki-page',
-    component: WikiPage,
+    component: WikiPage
   },
   {
     path: '/:pathMatch(.*)*',
