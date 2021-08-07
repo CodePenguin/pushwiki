@@ -64,9 +64,12 @@ export default defineComponent({
     }
 
     function retrieveContent(path: string) {
-      path = !path || path == '/' ? 'index' : path
+      path = !path || path == '/' ? root.settings.defaultPage : path
       if (path.startsWith('/')) {
         path = path.substring(1)
+      }
+      if (path.endsWith('/')) {
+        path = path + root.settings.defaultPage
       }
       if (path.endsWith('.md')) {
         path = path.substring(0, path.length - 3)

@@ -1,4 +1,5 @@
 export default interface ISettings {
+  defaultPage: string
   title: string
   navigation: {
     links: Array<{
