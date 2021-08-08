@@ -11,6 +11,9 @@ const defaultSettings: ISettings = {
       headerLevels: '2-4'
     }
   },
+  plugins: {
+    youtubeEmbed: true
+  },
   styles: {
     body: 'font-sans font-base font-normal leading-relaxed text-gray-800',
     main: '',

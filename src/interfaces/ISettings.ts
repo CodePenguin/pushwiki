@@ -12,6 +12,9 @@ export default interface ISettings {
       headerLevels: string
     }
   }
+  plugins: {
+    youtubeEmbed: boolean
+  }
   styles: {
     body: string
     main: string

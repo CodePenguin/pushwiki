@@ -5,12 +5,15 @@ import marked from 'marked'
 import TableOfContentsEntry from './TableOfContentsEntry'
 import { IMarkdownProcessor } from '@/interfaces/IMarkdownProcessor'
 import { Ref } from 'vue'
+import { IMarkdownProcessorPlugin } from '@/interfaces/IMarkdownProcessorPlugin'
 
 export default class MarkdownProcessor implements IMarkdownProcessor {
   private _settings: Ref<ISettings>
   private _tableOfContents: Array<TableOfContentsEntry> = []
   private _content: string | null = null
   private _mainHeading: string | null = null
+  private _linkPlugins: Array<IMarkdownProcessorPlugin> = []
+  private _afterProcessPlugins: Array<IMarkdownProcessorPlugin> = []
 
   get content(): string | null {
     return this._content
@@ -33,6 +36,7 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
     const preClasses = this._settings.value.styles.page.wikiPage.markdown.pre
     const tableClasses = this._settings.value.styles.page.wikiPage.markdown.table
     const tableOfContents: Array<TableOfContentsEntry> = []
+    const linkPlugins = this._linkPlugins
 
     const renderer = {
       code(code, infostring) {
@@ -49,6 +53,14 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
         tableOfContents.push({ text, level, slug, entries: [] })
         return `<h${level} id="${slug}">${text}</h${level}>`
       },
+      link(href, title, text) {
+        let result: string | boolean = false
+        linkPlugins.forEach((plugin) => {
+          result = !plugin.link || plugin.link(href, title, text)
+          if (result) return
+        })
+        return result
+      },
       table(header, body) {
         return `<table class="${tableClasses}"><thead>${header}</thead><tbody>${body}</tbody></table>`
       }
@@ -57,8 +69,24 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
     marked.use({ renderer })
     marked.setOptions({ baseUrl: '#/' })
 
-    this._content = DOMPurify.sanitize(marked(markdown))
+    let content = DOMPurify.sanitize(marked(markdown))
+    let result: string | boolean = false
+    this._afterProcessPlugins.forEach((plugin) => {
+      result = !plugin.afterProcess || plugin.afterProcess(content)
+      if (result) content = result as string
+    })
+
+    this._content = content
     this._tableOfContents = tableOfContents
     this._mainHeading = mainHeading
+  }
+
+  registerPlugin(plugin: IMarkdownProcessorPlugin): void {
+    if (plugin.link) {
+      this._linkPlugins.push(plugin)
+    }
+    if (plugin.afterProcess) {
+      this._afterProcessPlugins.push(plugin)
+    }
   }
 }

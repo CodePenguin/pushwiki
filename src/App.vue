@@ -27,6 +27,7 @@ import Navigation from '@/components/Navigation.vue'
 import DefaultSettings from '@/classes/DefaultSettings'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { scrollToHash } from '@/classes/Utils'
+import YouTubeEmbedMarkdownProcessorPlugin from '@/classes/YouTubeEmbedMarkdownProcessorPlugin'
 
 export default defineComponent({
   components: {
@@ -47,6 +48,10 @@ export default defineComponent({
     provide('settings', settings)
 
     let mainClasses = computed(() => settings.value.styles?.main ?? '')
+
+    function initializePlugins() {
+      if (settings.value.plugins.youtubeEmbed) markdownProcesor.registerPlugin(new YouTubeEmbedMarkdownProcessorPlugin())
+    }
 
     function setDocumentClasses() {
       // Body Classes
@@ -71,6 +76,7 @@ export default defineComponent({
       .then((response: AxiosResponse) => {
         settings.value = Object.assign({}, DefaultSettings, response.data)
         loaded.value = true
+        initializePlugins()
         setDocumentClasses()
         setSubTitle('')
       })
