@@ -20,6 +20,8 @@ import { useRoute, useRouter } from 'vue-router'
 import AppRoot from '@/classes/AppRoot'
 import { IAppRoot, AppRootKey } from '@/interfaces/IAppRoot'
 import ISettings from '@/interfaces/ISettings'
+import MarkdownProcessor from '@/classes/MarkdownProcessor'
+import { IMarkdownProcessor, MarkdownProcessorKey } from './interfaces/IMarkdownProcessor'
 import Loading from '@/components/Loading.vue'
 import Navigation from '@/components/Navigation.vue'
 import DefaultSettings from '@/classes/DefaultSettings'
@@ -38,8 +40,10 @@ export default defineComponent({
     const loaded = ref(false)
     const settings = ref<ISettings>(DefaultSettings)
     const root = new AppRoot(router, settings)
+    const markdownProcesor = new MarkdownProcessor(settings)
 
     provide<IAppRoot>(AppRootKey, root)
+    provide<IMarkdownProcessor>(MarkdownProcessorKey, markdownProcesor)
     provide('settings', settings)
 
     let mainClasses = computed(() => settings.value.styles?.main ?? '')
