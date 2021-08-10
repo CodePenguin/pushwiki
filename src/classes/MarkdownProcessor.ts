@@ -14,6 +14,7 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
   private _mainHeading: string | null = null
   private _linkPlugins: Array<IMarkdownProcessorPlugin> = []
   private _afterProcessPlugins: Array<IMarkdownProcessorPlugin> = []
+  private _beforeProcessPlugins: Array<IMarkdownProcessorPlugin> = []
 
   get content(): string | null {
     return this._content
@@ -55,10 +56,10 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
       },
       link(href, title, text) {
         let result: string | boolean = false
-        linkPlugins.forEach((plugin) => {
+        for (const plugin of linkPlugins) {
           result = !plugin.link || plugin.link(href, title, text)
-          if (result) return
-        })
+          if (result) break
+        }
         return result
       },
       table(header, body) {
@@ -69,12 +70,11 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
     marked.use({ renderer })
     marked.setOptions({ baseUrl: '#/' })
 
-    let content = DOMPurify.sanitize(marked(markdown))
-    let result: string | boolean = false
-    this._afterProcessPlugins.forEach((plugin) => {
-      result = !plugin.afterProcess || plugin.afterProcess(content)
-      if (result) content = result as string
-    })
+    this._beforeProcessPlugins.forEach((plugin) => !plugin.beforeProcess || plugin.beforeProcess())
+
+    const content = DOMPurify.sanitize(marked(markdown))
+
+    this._afterProcessPlugins.forEach((plugin) => !plugin.afterProcess || plugin.afterProcess())
 
     this._content = content
     this._tableOfContents = tableOfContents
@@ -82,6 +82,9 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
   }
 
   registerPlugin(plugin: IMarkdownProcessorPlugin): void {
+    if (plugin.beforeProcess) {
+      this._beforeProcessPlugins.push(plugin)
+    }
     if (plugin.link) {
       this._linkPlugins.push(plugin)
     }
