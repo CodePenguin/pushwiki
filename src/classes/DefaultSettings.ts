@@ -3,6 +3,10 @@ import ISettings from '@/interfaces/ISettings'
 const defaultSettings: ISettings = {
   defaultPage: 'index',
   title: 'PushWiki',
+  externals: {
+    links: [],
+    scripts: []
+  },
   navigation: {
     links: []
   },

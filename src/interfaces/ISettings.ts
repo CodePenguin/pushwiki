@@ -1,6 +1,22 @@
 export default interface ISettings {
   defaultPage: string
   title: string
+
+  externals: {
+    links: Array<{
+      crossOrigin: string
+      href: string
+      integrity: string
+      referrerPolicy: string
+      rel: string
+    }>
+    scripts: Array<{
+      crossOrigin: string
+      referrerPolicy: string
+      src: string
+    }>
+  },
+
   navigation: {
     links: Array<{
       title: string
