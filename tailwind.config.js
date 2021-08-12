@@ -7,7 +7,7 @@ module.exports = {
       process.env.VUE_APP_BUNDLE_TYPE === 'base'
         ? {
             greedy: [
-              (/^(sm:|md:|lg:|xl:)?(?:bg-|text-)/,
+              /^(sm:|md:|lg:|xl:)?(?:bg-|text-)/,
               /^(sm:|md:|lg:|xl:)?(?:border-|rounded-|shadow-)/,
               /^(sm:|md:|lg:|xl:)?(?:container)$/,
               /^(sm:|md:|lg:|xl:)?(?:grid-|col-|row-|table-)/,
@@ -15,7 +15,7 @@ module.exports = {
               /^(sm:|md:|lg:|xl:)?(?:not-sr-only|sr-only)$/,
               /^(sm:|md:|lg:|xl:)?(?:prose|prose-)/,
               /^(sm:|md:|lg:|xl:)?(?:visible|invisible|hidden)$/,
-              /^(sm:|md:|lg:|xl:)?z-$/)
+              /^(sm:|md:|lg:|xl:)?z-$/
             ]
           }
         : {}
