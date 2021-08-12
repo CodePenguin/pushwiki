@@ -58,15 +58,7 @@ module.exports = {
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {
       args[0].title = 'PushWiki'
-      if (process.env.VUE_APP_BUNDLE_TYPE === 'slim') {
-        args[0].template = args[0].template.replace('.html', '.slim.html')
-      }
       return args
-    })
-
-    config.plugin('copy').tap(([options]) => {
-      options[0].ignore.push('index.slim.html')
-      return [options]
     })
   }
 }

@@ -43,7 +43,7 @@ export default class YouTubeEmbedMarkdownProcessorPlugin implements IMarkdownPro
         iframe.src = `https://www.youtube.com/embed/${entry.key}${entry.query}`
         iframe.title = 'YouTube video player'
         iframe.setAttribute('frameBorder', '0')
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
         iframe.allowFullscreen = true
         element.replaceWith(iframe)
       }

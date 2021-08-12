@@ -15,7 +15,7 @@ export default interface ISettings {
       referrerPolicy: string
       src: string
     }>
-  },
+  }
 
   navigation: {
     links: Array<{
