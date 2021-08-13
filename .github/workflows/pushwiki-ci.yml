@@ -2,12 +2,12 @@ name: Pushwiki-CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
       - 'README.md'
       - 'docs/**'
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -17,30 +17,38 @@ jobs:
       VERSION: 0.0.0.${{ github.run_number }}
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.2.0
-      with:
-        cache: yarn
-    
-    - run: yarn install
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.2.0
+        with:
+          cache: yarn
 
-    - run: yarn build
+      - run: yarn install
 
-    - name: Upload Full
-      uses: actions/upload-artifact@v2
-      with:
-        name: pushwiki-full
-        path: dist/
+      - run: yarn build
 
-    - run: yarn build-slim
+      - name: Upload Full
+        uses: actions/upload-artifact@v2
+        with:
+          name: pushwiki-full
+          path: dist/
 
-    - name: Upload Slim
-      uses: actions/upload-artifact@v2
-      with:
-        name: pushwiki-slim
-        path: dist/
+      - run: yarn build-core
+
+      - name: Upload Core
+        uses: actions/upload-artifact@v2
+        with:
+          name: pushwiki-core
+          path: dist/
+
+      - run: yarn build-slim
+
+      - name: Upload Slim
+        uses: actions/upload-artifact@v2
+        with:
+          name: pushwiki-slim
+          path: dist/

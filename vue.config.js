@@ -47,7 +47,12 @@ module.exports = {
           })
         }
       }
-    ]
+    ],
+    resolve: {
+      alias: {
+        'highlight.js/lib/common': process.env.VUE_APP_BUNDLE_TYPE === 'core' ? 'highlight.js/lib/core' : 'highlight.js/lib/common'
+      }
+    }
   },
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {

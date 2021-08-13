@@ -56,7 +56,6 @@ export default defineComponent({
         Object.assign(element, link)
         document.body.appendChild(element)
       }
-      console.log('scripts', settings.value.externals.scripts)
       for (const script of settings.value.externals.scripts) {
         const element = document.createElement('script') as HTMLScriptElement
         Object.assign(element, script)

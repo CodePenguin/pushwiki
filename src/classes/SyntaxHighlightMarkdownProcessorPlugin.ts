@@ -3,7 +3,9 @@ import ISettings from '@/interfaces/ISettings'
 import hljs from 'highlight.js/lib/common'
 import { Ref } from 'vue'
 
-require('highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css')
+if (process.env.VUE_APP_BUNDLE_TYPE === 'base') {
+  require('highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css')
+}
 
 export default class SyntaxHighlightMarkdownProcessorPlugin implements IMarkdownProcessorPlugin {
   private _settings: Ref<ISettings>
@@ -20,8 +22,12 @@ export default class SyntaxHighlightMarkdownProcessorPlugin implements IMarkdown
 
   code?(code: string, infostring: string | undefined): boolean | string {
     infostring = infostring ?? 'plaintext'
-    const language = hljs.getLanguage(infostring) ? infostring : 'plaintext'
-    const content = hljs.highlight(code, { language }).value
-    return `<pre class="hljs ${this._preClasses}"><code class="language-${language}">${content}</code></pre>`
+    let content = code
+    let language = 'plaintext'
+    if (hljs.getLanguage(infostring)) {
+      language = infostring
+      content = hljs.highlight(code, { language }).value
+    }
+    return `<pre class="${this._preClasses}"><code class="language-${language}">${content}</code></pre>`
   }
 }
