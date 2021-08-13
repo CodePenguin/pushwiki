@@ -16,6 +16,7 @@ const defaultSettings: ISettings = {
     }
   },
   plugins: {
+    syntaxHighlight: true,
     youtubeEmbed: true
   },
   styles: {

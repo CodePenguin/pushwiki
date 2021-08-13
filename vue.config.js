@@ -35,7 +35,6 @@ module.exports = {
         apply: (compiler) => {
           if (process.env.NODE_ENV !== 'production') return
           compiler.hooks.done.tap('InlinePlugin', () => {
-            if (process.env.NODE_ENV !== 'production') return
             //Combine HTML and JS into a single deployment file
             fs.copyFileSync(path.resolve(__dirname, './dist/pushwiki.html'), path.resolve(__dirname, './dist/index.html'))
             const scriptContents = fs.readFileSync(path.resolve(__dirname, './dist/pushwiki.js'), 'utf8')
@@ -48,12 +47,7 @@ module.exports = {
           })
         }
       }
-    ],
-    resolve: {
-      alias: {
-        highlightCSS$: path.resolve(__dirname, './node_modules/highlight.js/styles/' + process.env.VUE_APP_HIGHLIGHTJS_STYLE + '.css')
-      }
-    }
+    ]
   },
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {

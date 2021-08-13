@@ -29,6 +29,7 @@ export default interface ISettings {
     }
   }
   plugins: {
+    syntaxHighlight: boolean
     youtubeEmbed: boolean
   }
   styles: {

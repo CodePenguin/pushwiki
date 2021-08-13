@@ -1,6 +1,5 @@
 import DOMPurify from 'dompurify'
 import ISettings from '@/interfaces/ISettings'
-import hljs from 'highlight.js/lib/common'
 import marked from 'marked'
 import TableOfContentsEntry from './TableOfContentsEntry'
 import { IMarkdownProcessor } from '@/interfaces/IMarkdownProcessor'
@@ -12,6 +11,7 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
   private _tableOfContents: Array<TableOfContentsEntry> = []
   private _content: string | null = null
   private _mainHeading: string | null = null
+  private _codePlugins: Array<IMarkdownProcessorPlugin> = []
   private _linkPlugins: Array<IMarkdownProcessorPlugin> = []
   private _afterProcessPlugins: Array<IMarkdownProcessorPlugin> = []
   private _beforeProcessPlugins: Array<IMarkdownProcessorPlugin> = []
@@ -37,14 +37,18 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
     const preClasses = this._settings.value.styles.page.wikiPage.markdown.pre
     const tableClasses = this._settings.value.styles.page.wikiPage.markdown.table
     const tableOfContents: Array<TableOfContentsEntry> = []
+    const codePlugins = this._codePlugins
     const linkPlugins = this._linkPlugins
 
     const renderer = {
-      code(code, infostring) {
-        infostring = infostring ?? 'plaintext'
-        const language = hljs.getLanguage(infostring) ? infostring : 'plaintext'
-        const content = hljs.highlight(code, { language }).value
-        return `<pre class="hljs ${preClasses}"><code class="language-${language}">${content}</code></pre>`
+      code(code, infostring, isEscaped) {
+        let result: string | boolean = false
+        for (const plugin of codePlugins) {
+          result = !plugin.code || plugin.code(code, infostring, isEscaped)
+          if (result) break
+        }
+        if (result) return result
+        return `<pre class="${preClasses}"><code>${code}</code></pre>`
       },
       heading(text, level, raw, slugger) {
         if (level === 1 && !mainHeading) {
@@ -84,6 +88,9 @@ export default class MarkdownProcessor implements IMarkdownProcessor {
   registerPlugin(plugin: IMarkdownProcessorPlugin): void {
     if (plugin.beforeProcess) {
       this._beforeProcessPlugins.push(plugin)
+    }
+    if (plugin.code) {
+      this._codePlugins.push(plugin)
     }
     if (plugin.link) {
       this._linkPlugins.push(plugin)

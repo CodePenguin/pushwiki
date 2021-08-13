@@ -27,6 +27,7 @@ import Navigation from '@/components/Navigation.vue'
 import DefaultSettings from '@/classes/DefaultSettings'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { scrollToHash } from '@/classes/Utils'
+import SyntaxHighlightMarkdownProcessorPlugin from '@/classes/SyntaxHighlightMarkdownProcessorPlugin'
 import YouTubeEmbedMarkdownProcessorPlugin from '@/classes/YouTubeEmbedMarkdownProcessorPlugin'
 
 export default defineComponent({
@@ -64,6 +65,7 @@ export default defineComponent({
     }
 
     function initializePlugins() {
+      if (settings.value.plugins.syntaxHighlight) markdownProcesor.registerPlugin(new SyntaxHighlightMarkdownProcessorPlugin(settings))
       if (settings.value.plugins.youtubeEmbed) markdownProcesor.registerPlugin(new YouTubeEmbedMarkdownProcessorPlugin())
     }
 
