@@ -34,6 +34,11 @@ jobs:
       - name: Zip Slim
         run: 7z a ./bin/PushWiki-${{ env.VERSION }}-slim.zip -tzip ./dist/*
 
+      - run: yarn build-core
+
+      - name: Zip Core
+        run: 7z a ./bin/PushWiki-${{ env.VERSION }}-core.zip -tzip ./dist/*
+
       - name: Upload binaries
         uses: softprops/action-gh-release@v1
         with:
