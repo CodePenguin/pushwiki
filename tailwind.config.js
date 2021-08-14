@@ -2,7 +2,7 @@ module.exports = {
   darkMode: false,
   plugins: [require('@tailwindcss/typography')],
   purge: {
-    content: process.env.VUE_APP_BUNDLE_TYPE === 'base' ? ['./src/**/*.{vue,ts}'] : ['./src/**/*.{vue}'],
+    content: process.env.VUE_APP_BUNDLE_TYPE === 'base' ? ['./src/**/*.{vue,ts}'] : ['./src/components/*.{vue,ts}'],
     safelist:
       process.env.VUE_APP_BUNDLE_TYPE === 'base'
         ? {
