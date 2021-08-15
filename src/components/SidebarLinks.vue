@@ -7,37 +7,22 @@
   </ul>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 import ISettings from '@/interfaces/ISettings'
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineProps } from 'vue'
 
-export default defineComponent({
-  name: 'SidebarLinks',
-  props: {
-    entries: {
-      type: Array as PropType<Array<TableOfContentsEntry>>,
-      required: true
-    },
-    nested: {
-      type: Boolean,
-      required: true
-    },
-    settings: {
-      type: Object as PropType<ISettings>,
-      required: true
-    }
-  },
-  setup(props) {
-    const root = useAppRoot()
+const props = defineProps<{
+  entries: Array<TableOfContentsEntry>
+  nested: boolean
+  settings: ISettings
+}>()
 
-    let sidebarStyles = computed(() => root.settings.styles.page.wikiPage.sidebar)
-    let liClasses = computed(() => (!props.nested ? sidebarStyles.value.li : sidebarStyles.value.liNested))
-    let navLinkClasses = computed(() => sidebarStyles.value.navLink)
-    let ulClasses = computed(() => (!props.nested ? sidebarStyles.value.ul : sidebarStyles.value.ulNested))
+const root = useAppRoot()
 
-    return { liClasses, navLinkClasses, ulClasses }
-  }
-})
+let sidebarStyles = computed(() => root.settings.styles.page.wikiPage.sidebar)
+let liClasses = computed(() => (!props.nested ? sidebarStyles.value.li : sidebarStyles.value.liNested))
+let navLinkClasses = computed(() => sidebarStyles.value.navLink)
+let ulClasses = computed(() => (!props.nested ? sidebarStyles.value.ul : sidebarStyles.value.ulNested))
 </script>

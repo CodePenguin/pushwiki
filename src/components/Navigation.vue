@@ -15,46 +15,29 @@
   </header>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
 import ISettings from '@/interfaces/ISettings'
 import { useRoute } from 'vue-router'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 
-export default defineComponent({
-  name: 'Navigation',
-  setup() {
-    const root = useAppRoot()
-    const route = useRoute()
+const root = useAppRoot()
+const route = useRoute()
 
-    const navOpen = ref(false)
-    const buttonClasses = computed(() => (root.settings as ISettings).styles.navigation.button)
-    const brandClasses = computed(() => root.settings.styles.navigation.brand)
-    const headerClasses = computed(() => root.settings.styles.navigation.header)
-    const navClasses = computed(() => root.settings.styles.navigation.nav + (!navOpen.value ? ' hidden' : ''))
-    const navLinkClasses = computed(() => root.settings.styles.navigation.navLink)
-    const title = computed(() => root.settings.title)
-    const links = computed(() => root.settings.navigation.links)
+const navOpen = ref(false)
+const buttonClasses = computed(() => (root.settings as ISettings).styles.navigation.button)
+const brandClasses = computed(() => root.settings.styles.navigation.brand)
+const headerClasses = computed(() => root.settings.styles.navigation.header)
+const navClasses = computed(() => root.settings.styles.navigation.nav + (!navOpen.value ? ' hidden' : ''))
+const navLinkClasses = computed(() => root.settings.styles.navigation.navLink)
+const title = computed(() => root.settings.title)
+const links = computed(() => root.settings.navigation.links)
 
-    function toggleNav() {
-      navOpen.value = !navOpen.value
-    }
-    watch(
-      () => route.path,
-      () => (navOpen.value = false)
-    )
-
-    return {
-      brandClasses,
-      buttonClasses,
-      headerClasses,
-      links,
-      navClasses,
-      navLinkClasses,
-      navOpen,
-      title,
-      toggleNav
-    }
-  }
-})
+function toggleNav() {
+  navOpen.value = !navOpen.value
+}
+watch(
+  () => route.path,
+  () => (navOpen.value = false)
+)
 </script>

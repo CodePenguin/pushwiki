@@ -2,43 +2,41 @@
   <div class="markdown" v-html="compiledContent" />
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted, onUpdated } from 'vue'
+<script lang="ts" setup>
+import { computed, defineEmits, defineProps, onMounted, onUpdated } from 'vue'
 
 import { useAppRoot } from '@/interfaces/IAppRoot'
 import { useMarkdownProcessor } from '@/interfaces/IMarkdownProcessor'
+import TableOfContentsEntry from '@/classes/TableOfContentsEntry'
 
-export default defineComponent({
-  props: {
-    content: {
-      type: String,
-      required: true
-    }
-  },
-  setup(props, { emit }) {
-    const root = useAppRoot()
-    const markdownProcesor = useMarkdownProcessor()
+const props = defineProps<{
+  content: string
+}>()
 
-    let contentUpdated = false
+const emit = defineEmits<{
+  (e: 'contentTitle', title: string | null): void
+  (e: 'tableOfContents', title: Array<TableOfContentsEntry>): void
+}>()
 
-    let compiledContent = computed(() => {
-      markdownProcesor.process(props.content as string)
-      contentUpdated = true
-      emit('contentTitle', markdownProcesor.mainHeading)
-      emit('tableOfContents', markdownProcesor.tableOfContents)
-      return markdownProcesor.content
-    })
+const root = useAppRoot()
+const markdownProcesor = useMarkdownProcessor()
 
-    function processContent() {
-      if (!contentUpdated) return
-      contentUpdated = false
-      root.updateRouterAnchors('.markdown')
-    }
+let contentUpdated = false
 
-    onMounted(processContent)
-    onUpdated(processContent)
-
-    return { compiledContent }
-  }
+let compiledContent = computed(() => {
+  markdownProcesor.process(props.content as string)
+  contentUpdated = true
+  emit('contentTitle', markdownProcesor.mainHeading)
+  emit('tableOfContents', markdownProcesor.tableOfContents)
+  return markdownProcesor.content
 })
+
+function processContent() {
+  if (!contentUpdated) return
+  contentUpdated = false
+  root.updateRouterAnchors('.markdown')
+}
+
+onMounted(processContent)
+onUpdated(processContent)
 </script>

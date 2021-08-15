@@ -5,18 +5,11 @@
   </article>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useAppRoot } from '@/interfaces/IAppRoot'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 
-export default defineComponent({
-  name: 'NotFoundPage',
-  setup() {
-    const root = useAppRoot()
+const root = useAppRoot()
 
-    let pageContentClasses = computed(() => root.settings.styles.page.notFound.content)
-
-    return { pageContentClasses }
-  }
-})
+let pageContentClasses = computed(() => root.settings.styles.page.notFound.content)
 </script>

@@ -10,21 +10,14 @@
   </article>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import DefaultSettings from '@/classes/DefaultSettings'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 
-export default defineComponent({
-  name: 'SettingsPage',
-  setup() {
-    const root = useAppRoot()
+const root = useAppRoot()
 
-    let currentSettings = computed(() => root.settings)
-    let defaultSettings = computed(() => DefaultSettings)
-    let pageContentClasses = computed(() => root.settings.styles.page.settings.content)
-
-    return { currentSettings, defaultSettings, pageContentClasses }
-  }
-})
+let currentSettings = computed(() => root.settings)
+let defaultSettings = computed(() => DefaultSettings)
+let pageContentClasses = computed(() => root.settings.styles.page.settings.content)
 </script>

@@ -14,8 +14,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
 import Loading from '@/components/Loading.vue'
 import Markdown from '@/components/Markdown.vue'
 import Sidebar from '@/components/Sidebar.vue'
@@ -24,93 +24,67 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import { useAppRoot } from '@/interfaces/IAppRoot'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-  name: 'WikiPage',
-  components: {
-    Loading,
-    Markdown,
-    Sidebar
-  },
-  setup() {
-    const route = useRoute()
-    const root = useAppRoot()
+const route = useRoute()
+const root = useAppRoot()
 
-    const loading = ref(true)
-    const localPath = ref('')
-    const path = route.params.path
-    const content = ref('')
-    const tableOfContents = ref<Array<TableOfContentsEntry>>([])
+const loading = ref(true)
+const localPath = ref('')
+const path = route.params.path
+const content = ref('')
+const tableOfContents = ref<Array<TableOfContentsEntry>>([])
 
-    const articleClasses = computed(() => root.settings.styles.page.wikiPage.article)
-    const hasContent = computed(() => content.value !== '')
-    const pageLoadingClasses = computed(() => root.settings.styles.page.loading.content)
-    const pageNotFoundClasses = computed(() => root.settings.styles.page.notFound.content)
-    const pageNotFoundAlertClasses = computed(() => root.settings.styles.page.notFound.alert)
-    const sidebarIsVisible = computed(() => tableOfContents.value.length > 1 || (tableOfContents.value.length === 1 && tableOfContents.value[0].level > 1))
-    const wikiPageClasses = computed(() => root.settings.styles.page.wikiPage.content)
+const articleClasses = computed(() => root.settings.styles.page.wikiPage.article)
+const hasContent = computed(() => content.value !== '')
+const pageLoadingClasses = computed(() => root.settings.styles.page.loading.content)
+const pageNotFoundClasses = computed(() => root.settings.styles.page.notFound.content)
+const pageNotFoundAlertClasses = computed(() => root.settings.styles.page.notFound.alert)
+const sidebarIsVisible = computed(() => tableOfContents.value.length > 1 || (tableOfContents.value.length === 1 && tableOfContents.value[0].level > 1))
+const wikiPageClasses = computed(() => root.settings.styles.page.wikiPage.content)
 
-    function handleError(newLocalPath: string, error: AxiosError) {
-      localPath.value = newLocalPath
-      content.value = ''
-      loading.value = false
-      if (error?.response?.status != 404) {
-        console.log('Error retrieving content', error)
-      }
-    }
-    function handleResponse(newLocalPath: string, response: AxiosResponse) {
-      localPath.value = newLocalPath
-      content.value = response.data
-      loading.value = false
-    }
-
-    function retrieveContent(path: string) {
-      path = !path || path == '/' ? root.settings.defaultPage : path
-      if (path.startsWith('/')) {
-        path = path.substring(1)
-      }
-      if (path.endsWith('/')) {
-        path = path + root.settings.defaultPage
-      }
-      if (path.endsWith('.md')) {
-        path = path.substring(0, path.length - 3)
-      }
-      const newLocalPath = path + '.md'
-      axios
-        .get(newLocalPath)
-        .then((response: AxiosResponse) => handleResponse(newLocalPath, response))
-        .catch((error: AxiosError) => handleError(newLocalPath, error))
-    }
-
-    function setSubTitle(subtitle: string) {
-      root.setSubTitle(subtitle)
-    }
-
-    function setTableOfContents(newTableOfContents: Array<TableOfContentsEntry>) {
-      tableOfContents.value = newTableOfContents
-    }
-
-    retrieveContent(path as string)
-
-    watch(
-      () => route.path,
-      () => retrieveContent(route.path)
-    )
-
-    return {
-      articleClasses,
-      content,
-      hasContent,
-      loading,
-      localPath,
-      pageLoadingClasses,
-      pageNotFoundClasses,
-      pageNotFoundAlertClasses,
-      setSubTitle,
-      setTableOfContents,
-      tableOfContents,
-      sidebarIsVisible,
-      wikiPageClasses
-    }
+function handleError(newLocalPath: string, error: AxiosError) {
+  localPath.value = newLocalPath
+  content.value = ''
+  loading.value = false
+  if (error?.response?.status != 404) {
+    console.log('Error retrieving content', error)
   }
-})
+}
+function handleResponse(newLocalPath: string, response: AxiosResponse) {
+  localPath.value = newLocalPath
+  content.value = response.data
+  loading.value = false
+}
+
+function retrieveContent(path: string) {
+  path = !path || path == '/' ? root.settings.defaultPage : path
+  if (path.startsWith('/')) {
+    path = path.substring(1)
+  }
+  if (path.endsWith('/')) {
+    path = path + root.settings.defaultPage
+  }
+  if (path.endsWith('.md')) {
+    path = path.substring(0, path.length - 3)
+  }
+  const newLocalPath = path + '.md'
+  axios
+    .get(newLocalPath)
+    .then((response: AxiosResponse) => handleResponse(newLocalPath, response))
+    .catch((error: AxiosError) => handleError(newLocalPath, error))
+}
+
+function setSubTitle(subtitle: string) {
+  root.setSubTitle(subtitle)
+}
+
+function setTableOfContents(newTableOfContents: Array<TableOfContentsEntry>) {
+  tableOfContents.value = newTableOfContents
+}
+
+retrieveContent(path as string)
+
+watch(
+  () => route.path,
+  () => retrieveContent(route.path)
+)
 </script>
