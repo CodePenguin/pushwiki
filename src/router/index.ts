@@ -9,7 +9,7 @@ const PAGE_REGEX = '[\\w-/%]+'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'index',
+    name: 'wiki-page-index',
     component: WikiPage
   },
   {
