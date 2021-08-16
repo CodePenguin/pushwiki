@@ -14,7 +14,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'contentTitle', title: string | null): void
+  (e: 'contentTitle', title: string): void
   (e: 'tableOfContents', title: Array<TableOfContentsEntry>): void
 }>()
 
@@ -26,7 +26,7 @@ let contentUpdated = false
 let compiledContent = computed(() => {
   markdownProcesor.process(props.content as string)
   contentUpdated = true
-  emit('contentTitle', markdownProcesor.mainHeading)
+  emit('contentTitle', markdownProcesor.mainHeading ?? '')
   emit('tableOfContents', markdownProcesor.tableOfContents)
   return markdownProcesor.content
 })

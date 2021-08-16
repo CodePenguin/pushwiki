@@ -86,7 +86,7 @@ retrieveContent(path as string)
 watch(
   () => route.path,
   () => {
-    const routeName = route.name as string ?? ''
+    const routeName = (route.name as string) ?? ''
     if (routeName.startsWith('wiki-page')) retrieveContent(route.path)
   }
 )
